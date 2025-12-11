@@ -1,1 +1,30 @@
 @import "tailwindcss";
+
+/* Importar fuentes desde node_modules con @fontsource */
+@import "@fontsource/montserrat/300.css";
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/montserrat/600.css";
+@import "@fontsource/montserrat/700.css";
+
+@import "@fontsource/museomoderno/400.css";
+@import "@fontsource/museomoderno/500.css";
+@import "@fontsource/museomoderno/700.css";
+
+/* Variables CSS globales */
+:root {
+  --color-hype-purple: #A201FF;
+  --color-hype-blue: #1C74B2;
+  --color-hype-green: #47FD27;
+  --color-hype-yellow: #F4F228;
+  --color-hype-orange: #FF7F00;
+
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'MuseoModerno', cursive;
+}
+
+/* Base defaults */
+html, body {
+  font-family: var(--font-primary);
+  scroll-behavior: smooth;
+}
