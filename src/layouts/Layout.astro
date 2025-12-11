@@ -1,18 +1,29 @@
 ---
-import "../styles/global.css";
-const { title = "Hype Marketing Digital" } = Astro.props;
+import { ClientRouter } from 'astro:transitions';
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const { title = "Hype", description = "Agencia de marketing digital" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="stylesheet" href="/src/styles/global.css" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
 		<title>{title}</title>
+		<ClientRouter />
 	</head>
-	<body>
-		<slot />
-	</body>
+	<body class="min-h-screen flex flex-col bg-white text-black">
+    <Header />
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
 </html>
