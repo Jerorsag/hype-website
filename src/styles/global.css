@@ -18,6 +18,7 @@
   --color-hype-green: #47FD27;
   --color-hype-yellow: #F4F228;
   --color-hype-orange: #FF7F00;
+  --color-hype-red: #FF0C00;
 
   --font-primary: 'Montserrat', sans-serif;
   --font-secondary: 'MuseoModerno', cursive;
@@ -27,4 +28,15 @@
 html, body {
   font-family: var(--font-primary);
   scroll-behavior: smooth;
+}
+
+/* Scroll hint (move-down) bounce animation */
+@keyframes hype-bounce {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
+}
+.hype-scroll-hint {
+  animation: hype-bounce 1.1s ease-in-out infinite;
+  will-change: transform;
 }
