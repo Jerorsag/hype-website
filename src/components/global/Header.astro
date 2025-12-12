@@ -1,32 +1,109 @@
 ---
+import { Menu, X } from 'lucide-react';
 ---
 
-<header class="w-full py-4 border-b bg-white">
-  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+<header class="sticky top-0 w-full py-4 bg-white shadow-md z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
 
     <!-- Logo -->
-    <a href="/" class="text-xl font-bold" style="font-family: var(--font-secondary);">
+    <a href="/" class="text-2xl font-bold text-black" style="font-family: var(--font-secondary);">
       Hype
     </a>
 
-    <!-- Navigation -->
+    <!-- Navigation - Desktop -->
     <nav class="hidden md:flex gap-8 text-gray-700 font-medium">
-      <a href="/" class="hover:text-black">Inicio</a>
-      <a href="/servicios" class="hover:text-black">Servicios</a>
-      <a href="/nosotros" class="hover:text-black">Nosotros</a>
+      <a href="/" class="hover:text-black transition-colors duration-200">
+        Inicio
+      </a>
+      <a href="/servicios" class="hover:text-black transition-colors duration-200">
+        Servicios
+      </a>
+      <a href="/nosotros" class="hover:text-black transition-colors duration-200">
+        Nosotros
+      </a>
     </nav>
 
-    <!-- CTA -->
+    <!-- CTA Button - Desktop -->
     <a
       href="/#contacto"
-      class="px-4 py-2 bg-black text-white rounded-md hover:bg-gray-800 transition"
+      class="hidden md:inline-block px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200 transform hover:scale-105"
     >
       Contáctanos
     </a>
 
-    <!-- Mobile placeholder (luego creamos hamburguesa real) -->
-    <div class="md:hidden">
-      <span>☰</span>
-    </div>
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+      aria-label="Toggle menu"
+    >
+      <Menu id="menu-icon" stroke="currentColor" />
+      <X id="close-icon" className="hidden" fill="none" stroke="currentColor"/>
+    </button>
   </div>
+
+  <!-- Mobile Navigation Menu -->
+  <nav id="mobile-menu" class="hidden md:hidden bg-white py-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-4">
+      <a href="/" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
+        Inicio
+      </a>
+      <a href="/servicios" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
+        Servicios
+      </a>
+      <a href="/nosotros" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
+        Nosotros
+      </a>
+      <a
+        href="/#contacto"
+        class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200 text-center"
+      >
+        Contáctanos
+      </a>
+    </div>
+  </nav>
 </header>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  const toggleMenu = () => {
+    const isHidden = mobileMenu?.classList.contains('hidden');
+    if (isHidden) {
+      mobileMenu?.classList.remove('hidden');
+      menuIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+    } else {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    }
+  };
+
+  mobileMenuBtn?.addEventListener('click', toggleMenu);
+
+  // Cerrar menú al hacer click en un link
+  document.querySelectorAll('#mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
+  });
+
+  // Cerrar menú al hacer click fuera
+  document.addEventListener('click', (e) => {
+    const isMenuOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
+    const isClickInsideMenu = mobileMenu?.contains(e.target);
+    const isClickOnButton = mobileMenuBtn?.contains(e.target);
+
+    if (isMenuOpen && !isClickInsideMenu && !isClickOnButton) {
+      mobileMenu?.classList.add('hidden');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    }
+  });
+</script>

@@ -301,7 +301,7 @@ function HeroSpline() {
 
   return (
     <div
-      className="hero-spline w-full h-[520px] sm:h-[500px] lg:h-[600px] rounded-lg overflow-hidden"
+      className="hero-spline w-full rounded-lg overflow-hidden"
       style={{
         filter: 'drop-shadow(0 8px 24px rgba(71, 253, 39, 0.12))',
         willChange: 'transform, opacity'
@@ -415,7 +415,7 @@ export default function Hero() {
         </div>
 
         {/* SPLINE 3D */}
-        <div ref={splineRef} className="block w-full flex justify-center mt-6 lg:mt-0">
+        <div ref={splineRef} className="w-full flex justify-center mt-6 lg:mt-0">
           <HeroSpline />
         </div>
 
