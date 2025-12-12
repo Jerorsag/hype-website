@@ -6,7 +6,7 @@ import { MoveDown } from 'lucide-react';
 // ============================================================================
 
 const SPLINE_CONFIG = {
-  sceneUrl: import.meta.env.PUBLIC_SPLINE_SCENE_URL || "https://prod.spline.design/qizxb2hVkyi2nMIb/scene.splinecode",
+  sceneUrl: import.meta.env.PUBLIC_SPLINE_SCENE_URL || "https://prod.spline.design/5JQQDR0UA-Puztx0/scene.splinecode",
   scale: parseFloat(import.meta.env.PUBLIC_SPLINE_SCALE) || 1.2,
 };
 
@@ -49,8 +49,8 @@ function HeroTitle() {
       <br />
       ESTÁ EN INTERNET,
       <br />
-      <span className="font-bold" style={{ color: 'text-white', fontFamily: 'var(--font-secondary)' }}>
-        NO EXISTE.
+      <span className="font-bold text-6xl sm:text-7xl lg:text-8xl" style={{ color: 'text-white', fontFamily: 'var(--font-secondary)' }}>
+        no existe.
       </span>
     </h1>
   );
