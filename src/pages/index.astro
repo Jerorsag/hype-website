@@ -5,6 +5,7 @@ import Hero from '../components/index/islands/Hero.jsx'
 import Marcas from '../components/index/islands/Marcas.jsx'
 import Servicios from '../components/index/Servicios.astro';
 import Valor from '../components/index/Valor.astro';
+import FAQComponent from '../components/index/islands/FAQ.jsx';
 import Casos from '../components/index/islands/Casos';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -17,5 +18,6 @@ import Casos from '../components/index/islands/Casos';
 	<Servicios />
 	<Valor />
 	<Casos client:load />
+	<FAQComponent client:visible />
   	<Home />
 </Layout>
