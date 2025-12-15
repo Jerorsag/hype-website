@@ -7,6 +7,7 @@ import Servicios from '../components/index/Servicios.astro';
 import Valor from '../components/index/Valor.astro';
 import FAQComponent from '../components/index/islands/FAQ.jsx';
 import Casos from '../components/index/islands/Casos';
+import Contacto from '../components/index/Contacto.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -19,5 +20,5 @@ import Casos from '../components/index/islands/Casos';
 	<Valor />
 	<Casos client:load />
 	<FAQComponent client:visible />
-  	<Home />
+	<Contacto />
 </Layout>
