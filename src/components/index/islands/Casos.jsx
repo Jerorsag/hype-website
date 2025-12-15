@@ -60,12 +60,15 @@ export default function Casos() {
 		if (!isMobile || !trackRef.current || !sectionRef.current || videos.length === 0) return;
 
 		let ctx = null;
+		let isMounted = true;
 
 		(async () => {
 			try {
 				const gsapModule = await import('gsap');
 				const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 				const gsap = gsapModule.default;
+
+				if (!isMounted) return;
 
 				// Registrar plugin una sola vez
 				if (!gsap.core?.globals()?.ScrollTrigger) {
@@ -75,7 +78,7 @@ export default function Casos() {
 				const section = sectionRef.current;
 				const track = trackRef.current;
 
-				if (!section || !track) return;
+				if (!section || !track || !isMounted) return;
 
 				// Slides individuales
 				const slides = track.querySelectorAll('[data-caso-slide]');
@@ -90,29 +93,33 @@ export default function Casos() {
 						ease: 'none',
 						scrollTrigger: {
 							trigger: section,
-							start: 'top top', // cuando el título llega al top
+							start: 'top top',
 							end: () => `+=${window.innerHeight * totalSlides}`,
-							scrub: 0.5, // Más fluido (menor valor = más suave)
+							scrub: 1, // Más suave en mobile
 							pin: true,
 							anticipatePin: 1,
 							invalidateOnRefresh: true,
-							// Snap más suave para que cada slide se ajuste de forma fluida
 							snap: {
 								snapTo: totalSlides > 1 ? 1 / (totalSlides - 1) : 1,
-								duration: { min: 0.2, max: 0.4 },
-								delay: 0.1,
-								ease: 'power1.out'
+								duration: { min: 0.3, max: 0.6 },
+								delay: 0.2,
+								ease: 'power2.out'
 							}
 						}
 					});
 				}, section);
 			} catch (err) {
-				console.error('Error inicializando GSAP ScrollTrigger en Casos:', err);
+				if (isMounted) {
+					console.error('Error inicializando GSAP ScrollTrigger en Casos:', err);
+				}
 			}
 		})();
 
 		return () => {
-			if (ctx) ctx.revert();
+			isMounted = false;
+			if (ctx && typeof ctx.revert === 'function') {
+				ctx.revert();
+			}
 		};
 	}, [videos, isMobile]);
 
@@ -136,14 +143,10 @@ export default function Casos() {
 		// Intentar reproducir
 		const playPromise = video.play();
 		if (playPromise !== undefined) {
-			playPromise
-				.then(() => {
-					console.log('Video reproduciéndose:', video.src);
-				})
-				.catch((err) => {
-					// Algunos navegadores pueden bloquear autoplay
-					console.log('Autoplay bloqueado para video:', video.src, err.message);
-				});
+			playPromise.catch(() => {
+				// Algunos navegadores pueden bloquear autoplay
+				// Error silencioso
+			});
 		}
 	};
 

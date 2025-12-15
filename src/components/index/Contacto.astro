@@ -50,8 +50,21 @@
 			</button>
 		</form>
 
+		<!-- Mensaje de éxito -->
+		<div id="success-message" class="hidden mt-6 max-w-xl mx-auto" style="display: none;">
+			<div class="bg-green-500 text-white px-6 py-4 rounded-xl flex items-center gap-3 shadow-lg">
+				<svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+				</svg>
+				<p class="font-semibold" style="font-family: var(--font-primary)">
+					¡Email enviado correctamente! Te contactaremos pronto.
+				</p>
+			</div>
+		</div>
+
 		<!-- Texto de garantía -->
 		<p 
+			id="guarantee-text"
 			class="text-sm sm:text-base text-white/80 mt-8"
 			style="font-family: var(--font-primary)"
 		>
@@ -60,23 +73,66 @@
 	</div>
 </section>
 
-<script is:inline>
-	document.addEventListener('DOMContentLoaded', () => {
-		const form = document.getElementById('contact-form');
-		const submitButton = document.getElementById('submit-button');
+<script>
+	(function() {
+		function initContactForm() {
+			const form = document.getElementById('contact-form');
+			const successMessage = document.getElementById('success-message');
+			const guaranteeText = document.getElementById('guarantee-text');
 
-		if (form) {
-			form.addEventListener('submit', (event) => {
+			if (!form) {
+				console.warn('Formulario de contacto no encontrado');
+				return;
+			}
+
+			form.addEventListener('submit', function(event) {
 				event.preventDefault();
+				event.stopPropagation();
+				event.stopImmediatePropagation();
 
 				const formData = new FormData(form);
 				const email = formData.get('email');
 
-				if (email) {
+				if (email && email.trim()) {
 					console.log('Email enviado:', email);
+					
+					// Ocultar texto de garantía
+					if (guaranteeText) {
+						guaranteeText.style.display = 'none';
+					}
+					
+					// Mostrar mensaje de éxito
+					if (successMessage) {
+						successMessage.classList.remove('hidden');
+						successMessage.style.display = 'block';
+					}
+					
+					// Resetear formulario
 					form.reset();
+					
+					// Ocultar mensaje después de 5 segundos
+					setTimeout(function() {
+						if (successMessage) {
+							successMessage.classList.add('hidden');
+							successMessage.style.display = 'none';
+						}
+						if (guaranteeText) {
+							guaranteeText.style.display = 'block';
+							guaranteeText.classList.remove('hidden');
+						}
+					}, 5000);
+				} else {
+					console.warn('Email vacío o inválido');
 				}
-			});
+				
+				return false;
+			}, { capture: true });
 		}
-	});
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initContactForm);
+		} else {
+			initContactForm();
+		}
+	})();
 </script>

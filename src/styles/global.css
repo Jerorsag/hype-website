@@ -25,9 +25,38 @@
 }
 
 /* Base defaults */
-html, body {
-  font-family: var(--font-primary);
+html {
   scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  font-family: var(--font-primary);
+  overflow-x: hidden;
+}
+
+/* Mejorar scroll en mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  body {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+  }
+  
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Smooth scroll para anchors */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
 }
 
 /* Scroll hint (move-down) bounce animation */

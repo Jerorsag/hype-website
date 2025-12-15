@@ -33,18 +33,24 @@ import { Menu, X } from 'lucide-react';
 
     <!-- Mobile Menu Button -->
     <button
+      type="button"
       id="mobile-menu-btn"
       class="md:hidden p-2 text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
       aria-label="Toggle menu"
+      aria-expanded="false"
     >
-      <Menu id="menu-icon" stroke="currentColor" />
-      <X id="close-icon" className="hidden" fill="none" stroke="currentColor"/>
+      <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
     </button>
   </div>
 
   <!-- Mobile Navigation Menu -->
-  <nav id="mobile-menu" class="hidden md:hidden bg-white py-4">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col gap-4">
+  <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col gap-4">
       <a href="/" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
         Inicio
       </a>
@@ -65,45 +71,82 @@ import { Menu, X } from 'lucide-react';
 </header>
 
 <script>
-  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuIcon = document.getElementById('menu-icon');
-  const closeIcon = document.getElementById('close-icon');
-
-  const toggleMenu = () => {
-    const isHidden = mobileMenu?.classList.contains('hidden');
-    if (isHidden) {
-      mobileMenu?.classList.remove('hidden');
-      menuIcon?.classList.add('hidden');
-      closeIcon?.classList.remove('hidden');
-    } else {
-      mobileMenu?.classList.add('hidden');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
+  // Mobile menu functionality
+  class MobileMenu {
+    constructor() {
+      this.btn = document.getElementById('mobile-menu-btn');
+      this.menu = document.getElementById('mobile-menu');
+      this.menuIcon = document.getElementById('menu-icon');
+      this.closeIcon = document.getElementById('close-icon');
+      this.isOpen = false;
+      
+      if (this.btn && this.menu && this.menuIcon && this.closeIcon) {
+        this.init();
+      }
     }
-  };
-
-  mobileMenuBtn?.addEventListener('click', toggleMenu);
-
-  // Cerrar menú al hacer click en un link
-  document.querySelectorAll('#mobile-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-    });
-  });
-
-  // Cerrar menú al hacer click fuera
-  document.addEventListener('click', (e) => {
-    const isMenuOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
-    const isClickInsideMenu = mobileMenu?.contains(e.target);
-    const isClickOnButton = mobileMenuBtn?.contains(e.target);
-
-    if (isMenuOpen && !isClickInsideMenu && !isClickOnButton) {
-      mobileMenu?.classList.add('hidden');
-      menuIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
+    
+    init() {
+      // Toggle menu on button click
+      this.btn.onclick = (e) => {
+        e.stopPropagation();
+        this.toggle();
+      };
+      
+      // Close menu when clicking a link
+      const links = this.menu.querySelectorAll('a');
+      links.forEach(link => {
+        link.onclick = () => {
+          this.close();
+        };
+      });
+      
+      // Close menu when clicking outside
+      document.onclick = (e) => {
+        if (this.isOpen && !this.menu.contains(e.target) && !this.btn.contains(e.target)) {
+          this.close();
+        }
+      };
+      
+      // Close menu with ESC key
+      document.onkeydown = (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.close();
+        }
+      };
     }
-  });
+    
+    toggle() {
+      if (this.isOpen) {
+        this.close();
+      } else {
+        this.open();
+      }
+    }
+    
+    open() {
+      this.isOpen = true;
+      this.menu.classList.remove('hidden');
+      this.menuIcon.classList.add('hidden');
+      this.closeIcon.classList.remove('hidden');
+      this.btn.setAttribute('aria-expanded', 'true');
+    }
+    
+    close() {
+      this.isOpen = false;
+      this.menu.classList.add('hidden');
+      this.menuIcon.classList.remove('hidden');
+      this.closeIcon.classList.add('hidden');
+      this.btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+  
+  // Initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new MobileMenu());
+  } else {
+    new MobileMenu();
+  }
+  
+  // Reinitialize on Astro page navigation
+  document.addEventListener('astro:page-load', () => new MobileMenu());
 </script>
