@@ -55,108 +55,64 @@ export default function Casos() {
 		});
 	}, []);
 
-	// Animación horizontal en móvil
+	// Animación horizontal en móvil con GSAP + ScrollTrigger (1 slide por vista + snap)
 	useEffect(() => {
-		if (!isMobile || !trackRef.current || !sectionRef.current || !containerRef.current || videos.length === 0) return;
+		if (!isMobile || !trackRef.current || !sectionRef.current || videos.length === 0) return;
 
-		let gsap = null;
-		let scrollHandler = null;
-		let resizeHandler = null;
-		let rafId = null;
-		let cleanup = null;
+		let ctx = null;
 
-		// Lazy-load GSAP
-		import('gsap').then((mod) => {
-			gsap = mod.default;
+		(async () => {
+			try {
+				const gsapModule = await import('gsap');
+				const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+				const gsap = gsapModule.default;
 
-			const section = sectionRef.current;
-			const track = trackRef.current;
-			const container = containerRef.current;
-
-			const updateDimensions = () => {
-				const trackWidth = track.scrollWidth;
-				const containerWidth = container.clientWidth;
-				const maxTranslate = Math.max(trackWidth - containerWidth, 0);
-				
-				// Altura de scroll: suficiente para revelar todos los videos
-				// Usamos el ancho total del track como referencia para la altura de scroll
-				const winH = window.innerHeight;
-				// Altura adicional para permitir scroll suave (proporcional al ancho del track)
-				const scrollHeight = winH + maxTranslate * 1.2 + 300;
-				section.style.minHeight = `${scrollHeight}px`;
-
-				return { maxTranslate, scrollHeight, winH };
-			};
-
-			let dimensions = updateDimensions();
-
-			const onScroll = () => {
-				const rect = section.getBoundingClientRect();
-				const { winH, scrollHeight, maxTranslate } = dimensions;
-
-				// Calcular progreso basado en la posición de la sección
-				// Cuando el top de la sección está en el top del viewport, progress = 0
-				// Cuando el bottom de la sección está en el top del viewport, progress = 1
-				const sectionTop = rect.top;
-				const sectionHeight = rect.height;
-				
-				// Área de scroll efectiva (después del título sticky)
-				const titleOffset = 200; // Espacio para el título sticky
-				const scrollStart = winH - titleOffset;
-				const scrollRange = scrollHeight - winH;
-				
-				let progress = 0;
-				
-				if (sectionTop <= scrollStart) {
-					// La sección ha entrado en el área de scroll
-					const scrolled = scrollStart - sectionTop;
-					progress = Math.min(Math.max(scrolled / scrollRange, 0), 1);
+				// Registrar plugin una sola vez
+				if (!gsap.core?.globals()?.ScrollTrigger) {
+					gsap.registerPlugin(ScrollTrigger);
 				}
 
-				const x = -maxTranslate * progress;
-				gsap.to(track, { 
-					x, 
-					duration: 0.1, 
-					ease: 'none',
-					overwrite: true
-				});
-			};
+				const section = sectionRef.current;
+				const track = trackRef.current;
 
-			// Throttle con requestAnimationFrame
-			let ticking = false;
-			scrollHandler = () => {
-				if (!ticking) {
-					rafId = window.requestAnimationFrame(() => {
-						onScroll();
-						ticking = false;
+				if (!section || !track) return;
+
+				// Slides individuales
+				const slides = track.querySelectorAll('[data-caso-slide]');
+				const totalSlides = slides.length || videos.length || 1;
+
+				ctx = gsap.context(() => {
+					gsap.set(track, { xPercent: 0 });
+
+					// ScrollTrigger: pin de la sección y desplazamiento horizontal
+					gsap.to(track, {
+						xPercent: -100 * (totalSlides - 1),
+						ease: 'none',
+						scrollTrigger: {
+							trigger: section,
+							start: 'top top', // cuando el título llega al top
+							end: () => `+=${window.innerHeight * totalSlides}`,
+							scrub: 0.5, // Más fluido (menor valor = más suave)
+							pin: true,
+							anticipatePin: 1,
+							invalidateOnRefresh: true,
+							// Snap más suave para que cada slide se ajuste de forma fluida
+							snap: {
+								snapTo: totalSlides > 1 ? 1 / (totalSlides - 1) : 1,
+								duration: { min: 0.2, max: 0.4 },
+								delay: 0.1,
+								ease: 'power1.out'
+							}
+						}
 					});
-					ticking = true;
-				}
-			};
-
-			resizeHandler = () => {
-				dimensions = updateDimensions();
-				onScroll();
-			};
-
-			window.addEventListener('scroll', scrollHandler, { passive: true });
-			window.addEventListener('resize', resizeHandler, { passive: true });
-
-			// Llamada inicial
-			onScroll();
-
-			// Cleanup function
-			cleanup = () => {
-				window.removeEventListener('scroll', scrollHandler);
-				window.removeEventListener('resize', resizeHandler);
-				if (rafId) window.cancelAnimationFrame(rafId);
-			};
-		}).catch((err) => {
-			console.error('Error loading GSAP:', err);
-		});
+				}, section);
+			} catch (err) {
+				console.error('Error inicializando GSAP ScrollTrigger en Casos:', err);
+			}
+		})();
 
 		return () => {
-			if (cleanup) cleanup();
+			if (ctx) ctx.revert();
 		};
 	}, [videos, isMobile]);
 
@@ -207,12 +163,12 @@ export default function Casos() {
 		<section 
 			ref={sectionRef} 
 			id="casos" 
-			className="w-full bg-gray-50 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12 overflow-hidden relative"
+			className="w-full bg-gray-50 pt-2 sm:pt-24 lg:pt-28 pb-6 sm:pb-10 overflow-hidden relative"
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Título y descripción - Fijo en móvil, normal en desktop */}
 				<div 
-					className={`text-center mb-6 sm:mb-8 ${isMobile ? 'sticky top-20 z-30 bg-gray-50 pb-4 pt-2' : ''}`}
+					className={`text-center mb-2 sm:mb-6 ${isMobile ? 'sticky top-20 z-30 bg-gray-50 pb-3 pt-2' : ''}`}
 					style={isMobile ? { backdropFilter: 'blur(10px)', backgroundColor: 'rgba(249, 250, 251, 0.95)' } : {}}
 				>
 					<p 
@@ -222,7 +178,7 @@ export default function Casos() {
 						Casos Reales
 					</p>
 					<h2 
-						className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-3" 
+						className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-1" 
 						style={{ fontFamily: 'var(--font-primary)' }}
 					>
 						Resultados que{' '}
@@ -233,9 +189,6 @@ export default function Casos() {
 							hablan
 						</span>
 					</h2>
-					<p className="mt-4 text-sm sm:text-base text-gray-600 max-w-2xl mx-auto">
-						Descubre cómo hemos ayudado a marcas como la tuya a alcanzar sus objetivos digitales.
-					</p>
 				</div>
 
 				{/* Desktop: Grid de 6 videos del mismo tamaño */}
@@ -292,59 +245,64 @@ export default function Casos() {
 					)}
 				</div>
 
-				{/* Mobile: Track horizontal con animación de scroll */}
+				{/* Mobile: experiencia inmersiva horizontal (1 video por vista) */}
 				<div className="sm:hidden relative">
 					{videos.length > 0 ? (
 						<div 
 							ref={containerRef}
-							className="overflow-hidden"
-							style={{ height: '400px' }}
+							className="overflow-hidden rounded-2xl"
+							style={{ height: '100vh' }}
 						>
 							<div 
 								ref={trackRef} 
-								className="flex gap-4 will-change-transform"
+								className="flex will-change-transform h-full"
 								style={{ transform: 'translateX(0px)' }}
 							>
 								{videos.map((video, i) => (
 									<div 
 										key={`mobile-video-${i}`} 
-										className="min-w-[85vw] rounded-xl overflow-hidden shadow-lg bg-gray-200 flex-shrink-0"
-										style={{ height: '400px' }}
+										data-caso-slide
+										className="w-full h-full flex justify-center items-start flex-shrink-0 px-4 pt-2"
 									>
-										<video 
-											ref={(el) => {
-												if (el) {
-													videoRefs.current[`mobile-${i}`] = el;
-													// Intentar reproducir inmediatamente cuando se asigna el ref
-													setTimeout(() => playVideo(el), 200);
-												}
-											}}
-											src={video} 
-											muted 
-											loop 
-											playsInline 
-											autoPlay
-											preload="auto"
-											style={{ 
-												display: 'block',
-												width: '100%',
-												height: '100%',
-												objectFit: 'cover',
-												backgroundColor: '#000'
-											}}
-											onLoadedMetadata={(e) => {
-												playVideo(e.target);
-											}}
-											onCanPlay={(e) => {
-												playVideo(e.target);
-											}}
-											onLoadedData={(e) => {
-												playVideo(e.target);
-											}}
-											onError={(e) => {
-												console.error('❌ Error cargando video:', video, e.target.error);
-											}}
-										/>
+										<div className="w-full flex items-center justify-center rounded-2xl overflow-hidden bg-black/80">
+											<video 
+												ref={(el) => {
+													if (el) {
+														videoRefs.current[`mobile-${i}`] = el;
+														// Intentar reproducir inmediatamente cuando se asigna el ref
+														setTimeout(() => playVideo(el), 200);
+													}
+												}}
+												src={video} 
+												muted 
+												loop 
+												playsInline 
+												autoPlay
+												preload="auto"
+												style={{ 
+													display: 'block',
+													height: 'calc(100vh - 140px)',
+													width: 'auto',
+													aspectRatio: '9 / 16',
+													maxWidth: '90vw',
+													borderRadius: '1.2rem',
+													objectFit: 'cover',
+													backgroundColor: '#000'
+												}}
+												onLoadedMetadata={(e) => {
+													playVideo(e.target);
+												}}
+												onCanPlay={(e) => {
+													playVideo(e.target);
+												}}
+												onLoadedData={(e) => {
+													playVideo(e.target);
+												}}
+												onError={(e) => {
+													console.error('❌ Error cargando video:', video, e.target.error);
+												}}
+											/>
+										</div>
 									</div>
 								))}
 							</div>
