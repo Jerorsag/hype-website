@@ -1,0 +1,55 @@
+---
+import { Code, ExternalLink } from 'lucide-react';
+---
+
+<section id="desarrollo" class="w-full bg-white py-12 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 sm:mb-12">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
+        <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Desarrollo de Software</span>
+      </h2>
+      <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+        Soluciones tecnológicas de vanguardia a través de nuestros partners especializados.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
+      <!-- Desarrollo Web -->
+      <div class="group p-6 sm:p-8 rounded-xl border-2 border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 bg-blue-100">
+          <Code className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600" />
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">
+          Desarrollo Web
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Experiencias digitales rápidas, seguras y diseñadas para convertir visitantes en clientes.
+        </p>
+      </div>
+
+      <!-- Desarrollo de Apps -->
+      <div class="group p-6 sm:p-8 rounded-xl border-2 border-gray-200 hover:border-purple-600 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 bg-purple-100">
+          <Code className="w-6 h-6 sm:w-7 sm:h-7 text-purple-600" />
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">
+          Desarrollo de Aplicaciones
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Apps móviles y web progresivas que impulsan tu negocio al siguiente nivel.
+        </p>
+      </div>
+    </div>
+
+    <!-- Referencia a empresa externa -->
+    <div class="mt-10 sm:mt-12 text-center">
+      <div class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-full border border-purple-200">
+        <ExternalLink className="w-5 h-5 text-purple-600" />
+        <p class="text-sm sm:text-base text-gray-700">
+          Servicios de desarrollo proporcionados por <a href="https://hyperxel.com" target="_blank" rel="noopener noreferrer" class="font-semibold text-purple-600 hover:text-purple-700 transition-colors">Hyperxel</a>, nuestro partner tecnológico especializado
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+

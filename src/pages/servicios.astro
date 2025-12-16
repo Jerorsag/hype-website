@@ -1,16 +1,12 @@
 ---
+import Hero from "../components/servicios/islands/Hero";
+import Ofertas from "../components/servicios/Ofertas.astro";
+import CTA from "../components/servicios/CTA.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Servicios – Hype">
-  <section class="max-w-5xl mx-auto px-6 py-20">
-    <h1 class="text-4xl font-bold mb-6">Nuestros Servicios</h1>
-    <p class="text-gray-600 mb-6">Listado básico para prueba.</p>
-
-    <ul class="space-y-4">
-      <li class="p-4 border rounded-lg">Servicio 1</li>
-      <li class="p-4 border rounded-lg">Servicio 2</li>
-      <li class="p-4 border rounded-lg">Servicio 3</li>
-    </ul>
-  </section>
+<Layout title="Servicios – Hype Marketing Digital" description="Servicios completos de marketing digital, branding, desarrollo web y más para impulsar tu negocio.">
+  <Hero client:load />
+  <Ofertas />
+  <CTA />
 </Layout>
