@@ -2,8 +2,9 @@
 import { ClientRouter } from 'astro:transitions';
 import Header from "../components/global/Header.astro";
 import Footer from "../components/global/Footer.astro";
+import WhatsAppButton from "../components/ui/WhatsAppButton.astro";
 
-const { title = "Hype", description = "Agencia de marketing digital" } = Astro.props;
+const { title = "Hype Marketing Digital", description = "Agencia de marketing digital" } = Astro.props;
 ---
 
 <!doctype html>
@@ -26,6 +27,9 @@ const { title = "Hype", description = "Agencia de marketing digital" } = Astro.p
     </main>
 
     <Footer />
+    
+    <!-- Botón flotante de WhatsApp -->
+    <WhatsAppButton />
   </body>
 </html>
 
