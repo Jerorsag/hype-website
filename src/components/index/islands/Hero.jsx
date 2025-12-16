@@ -16,14 +16,14 @@ const SPLINE_CONFIG = {
 function HeroBadge() {
   return (
     <div 
-      className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20 w-fit"
+      className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 w-fit"
     >
       <span 
         className="inline-block w-2 h-2 rounded-full"
         style={{ backgroundColor: 'var(--color-hype-green)' }}
       />
       <span 
-        className="text-sm font-medium text-black"
+        className="text-sm font-medium text-white"
         style={{ fontFamily: 'var(--font-primary)' }}
       >
         Agencia de Marketing Digital
@@ -414,10 +414,10 @@ export default function Hero() {
           <HeroStats />
         </div>
 
-        {/* SPLINE 3D */}
+        {/* SPLINE 3D
         <div ref={splineRef} className="w-full flex justify-center mt-6 lg:mt-0">
           <HeroSpline />
-        </div>
+        </div> */}
 
       </div>
 
