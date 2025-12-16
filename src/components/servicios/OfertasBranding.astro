@@ -1,0 +1,73 @@
+---
+import { Palette, FileText, Image, Sparkles } from 'lucide-react';
+---
+
+<section id="branding" class="w-full bg-gray-50 py-12 sm:py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 sm:mb-12">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
+        <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Branding y Diseño Gráfico</span>
+      </h2>
+      <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+        Identidad visual completa que refleja la esencia de tu marca y genera conexión emocional con tu audiencia.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+      
+      <!-- Creación de logo -->
+      <div class="group p-6 sm:p-8 rounded-xl border-2 border-gray-200 hover:border-purple-600 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 bg-purple-100">
+          <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 text-purple-600" />
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">
+          Creación de Logo
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Diseño de logo único y memorable que representa la identidad y valores de tu marca.
+        </p>
+      </div>
+
+      <!-- Identidad visual -->
+      <div class="group p-6 sm:p-8 rounded-xl border-2 border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 bg-blue-100">
+          <Palette className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600" />
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">
+          Identidad Visual
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Sistema completo de identidad visual que proyecta coherencia y profesionalismo en todos tus canales.
+        </p>
+      </div>
+
+      <!-- Manual de marca -->
+      <div class="group p-6 sm:p-8 rounded-xl border-2 border-gray-200 hover:border-purple-600 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 bg-purple-100">
+          <FileText className="w-6 h-6 sm:w-7 sm:h-7 text-purple-600" />
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">
+          Manual de Marca
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Guía completa de uso de marca que asegura la consistencia visual en todas tus aplicaciones.
+        </p>
+      </div>
+
+      <!-- Diseño de piezas gráficas -->
+      <div class="group p-6 sm:p-8 rounded-xl border-2 border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer bg-white">
+        <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-lg flex items-center justify-center mb-4 bg-blue-100">
+          <Image className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600" />
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-2">
+          Piezas Gráficas
+        </h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Diseño de flyers, contenido digital y piezas gráficas que destacan y comunican tu mensaje de forma efectiva.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+

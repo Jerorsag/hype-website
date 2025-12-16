@@ -1,14 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { MoveDown } from 'lucide-react';
-
-// ============================================================================
-// CONFIGURACIÓN
-// ============================================================================
-
-const SPLINE_CONFIG = {
-  sceneUrl: import.meta.env.PUBLIC_SPLINE_SCENE_URL || "https://prod.spline.design/5JQQDR0UA-Puztx0/scene.splinecode",
-  scale: parseFloat(import.meta.env.PUBLIC_SPLINE_SCALE) || 1.2,
-};
 
 // ============================================================================
 // COMPONENTE: BADGE
@@ -45,12 +36,12 @@ function HeroTitle() {
         willChange: 'transform, opacity'
       }}
     >
-      SI TU NEGOCIO NO
+      LA EMPRESA QUE NO
       <br />
-      ESTÁ EN INTERNET,
+      ESTÁ EN REDES SOCIALES,
       <br />
       <span className="font-bold text-6xl sm:text-7xl lg:text-8xl" style={{ color: 'text-white', fontFamily: 'var(--font-secondary)' }}>
-        no existe.
+        ya no existe.
       </span>
     </h1>
   );
@@ -65,9 +56,8 @@ function HeroDescription() {
       className="hero-description text-base sm:text-lg text-gray-200 max-w-lg leading-relaxed"
       style={{ fontFamily: 'var(--font-primary)', willChange: 'transform, opacity' }}
     >
-      En <span className="font-bold">Hype Marketing Digital</span> transformamos ideas en movimiento. Creamos 
-      estrategias que no solo se ven bien, sino que generan resultados reales y 
-      medibles para tu negocio.
+      En <span className="font-bold">Hype Marketing Digital</span> ayudamos a marcas y emprendedores a crecer con estrategias digitales auténticas, creativas y enfocadas en resultados.
+      Humanizamos tu marca, potenciamos el alcance orgánico y transformamos tu visión en crecimiento real.
     </p>
   );
 }
@@ -231,99 +221,70 @@ function HeroStats() {
 }
 
 // ============================================================================
-// COMPONENTE: SPLINE 3D
+// COMPONENTE: BANNER DE TIBURONES
 // ============================================================================
-function HeroSpline() {
-  // Renderea un placeholder vacío hasta que el Spline se cargue en idle
-  const [SplineComp, setSplineComp] = useState(null);
-  const mountedRef = useRef(true);
-  const [calculatedScale, setCalculatedScale] = useState(SPLINE_CONFIG.scale);
+function HeroBanner({ imageRef }) {
+  const floatRef = useRef(null);
 
   useEffect(() => {
-    // ajustar escala responsive para móviles
-    const updateScale = () => {
-      try {
-        const w = window.innerWidth;
-        // Si es móvil (<640px) reducir ligeramente la escala para que quepa y sea interactivo
-        if (w < 640) setCalculatedScale(SPLINE_CONFIG.scale * 0.78);
-        else setCalculatedScale(SPLINE_CONFIG.scale);
-      } catch (e) {
-        setCalculatedScale(SPLINE_CONFIG.scale);
-      }
-    };
+    let ctx = null;
+    
+    // Importar GSAP dinámicamente para animación de flotación continua
+    import('gsap').then(({ default: gsap }) => {
+      if (!floatRef.current) return;
 
-    updateScale();
-    window.addEventListener('resize', updateScale, { passive: true });
-    mountedRef.current = true;
-
-    const loadSpline = () => {
-      // import dinámico del paquete solo cuando sea necesario (evita listeners pesados al inicio)
-      import('@splinetool/react-spline')
-        .then((mod) => {
-          if (!mountedRef.current) return;
-          setSplineComp(() => mod.default);
-        })
-        .catch(() => {});
-    };
-
-    const onFirstInteraction = () => {
-      loadSpline();
-      window.removeEventListener('pointerdown', onFirstInteraction, true);
-      window.removeEventListener('keydown', onFirstInteraction, true);
-    };
-
-    // Preferir requestIdleCallback para no bloquear el hilo principal
-    if (typeof window.requestIdleCallback === 'function') {
-      const id = window.requestIdleCallback(() => loadSpline(), { timeout: 1500 });
-      window.addEventListener('pointerdown', onFirstInteraction, { capture: true, passive: true });
-      window.addEventListener('keydown', onFirstInteraction, { capture: true, passive: true });
-      return () => {
-        mountedRef.current = false;
-        window.cancelIdleCallback?.(id);
-        window.removeEventListener('pointerdown', onFirstInteraction, true);
-        window.removeEventListener('keydown', onFirstInteraction, true);
-      };
-    }
-
-    // Fallback: cargar después de un pequeño delay y también en la primera interacción
-    const t = setTimeout(loadSpline, 1000);
-    window.addEventListener('pointerdown', onFirstInteraction, { capture: true, passive: true });
-    window.addEventListener('keydown', onFirstInteraction, { capture: true, passive: true });
+      // Crear contexto para cleanup automático
+      ctx = gsap.context(() => {
+        // Animación continua sutil de flotación (inicia después de la animación de entrada)
+        const floatAnimation = gsap.to(floatRef.current, {
+          y: -12,
+          duration: 3.5,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true,
+          delay: 1.8 // Espera a que termine la animación de entrada
+        });
+      });
+    }).catch(() => {});
 
     return () => {
-      mountedRef.current = false;
-      clearTimeout(t);
-      window.removeEventListener('pointerdown', onFirstInteraction, true);
-      window.removeEventListener('keydown', onFirstInteraction, true);
-      window.removeEventListener('resize', updateScale, true);
+      if (ctx && typeof ctx.revert === 'function') {
+        ctx.revert();
+      }
     };
   }, []);
 
   return (
-    <div
-      className="hero-spline w-full rounded-lg overflow-hidden"
-      style={{
-        filter: 'drop-shadow(0 8px 24px rgba(71, 253, 39, 0.12))',
-        willChange: 'transform, opacity'
-      }}
+    <div 
+      className="hero-banner w-full flex justify-center items-center mt-6 lg:mt-0"
+      style={{ willChange: 'transform, opacity' }}
     >
-      <div
+      <div 
+        ref={imageRef}
+        className="relative w-full max-w-2xl"
         style={{
-          transform: `scale(${calculatedScale})`,
-          transformOrigin: 'center',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          willChange: 'transform, opacity',
-          touchAction: 'auto',
-          pointerEvents: 'auto'
+          filter: 'drop-shadow(0 20px 40px rgba(71, 253, 39, 0.25))',
         }}
       >
-        {SplineComp ? (
-          <div style={{ width: '100%', height: '100%', maxWidth: 560 }}>
-            <SplineComp scene={SPLINE_CONFIG.sceneUrl} />
-          </div>
-        ) : null}
+        <div ref={floatRef}>
+          <img 
+            src="/images/tiburones/banner.jpeg"
+            alt="Equipo Hype - Tiburones del Marketing Digital"
+            className="w-full h-auto rounded-2xl object-cover shadow-2xl hover:scale-105 transition-transform duration-700 ease-out"
+            style={{
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
+          />
+        </div>
+        {/* Efecto de brillo sutil */}
+        <div 
+          className="absolute inset-0 rounded-2xl pointer-events-none"
+          style={{
+            background: 'linear-gradient(135deg, rgba(71, 253, 39, 0.1) 0%, rgba(162, 1, 255, 0.1) 100%)',
+            mixBlendMode: 'overlay'
+          }}
+        />
       </div>
     </div>
   );
@@ -332,16 +293,7 @@ function HeroSpline() {
 // ============================================================================
 // FUNCIÓN: INICIALIZAR ANIMACIONES CON GSAP
 // ============================================================================
-/**
- * Inicializa todas las animaciones del Hero usando GSAP
- * - Usa `gsap.context` para scope y cleanup automático en React
- * - Usa `autoAlpha` y `transform` para animaciones GPU-friendly
- * - Reduce trabajo (menos sombras animadas, menor duración conjunta)
- * @param {React.RefObject} contentRef - Referencia al contenedor de contenido
- * @param {React.RefObject} splineRef - Referencia al componente Spline
- * @returns {Promise<Object>} contexto de GSAP con método `revert()` para cleanup
- */
-async function initializeHeroAnimations(contentRef, splineRef) {
+async function initializeHeroAnimations(contentRef, bannerRef) {
   const { default: gsap } = await import("gsap");
 
   if (!contentRef.current) return null;
@@ -366,9 +318,9 @@ async function initializeHeroAnimations(contentRef, splineRef) {
     // Estadísticas
     tl.from(contentRef.current.querySelectorAll(".hero-stat"), { autoAlpha: 0, y: 10, stagger: 0.06 }, 0.6);
 
-    // Spline: animar sólo opacidad/scale del contenedor para evitar repaints
-    if (splineRef.current) {
-      tl.from(splineRef.current, { autoAlpha: 0, scale: 0.98, duration: 0.9 }, 0.45);
+    // Banner: animación suave y destacada
+    if (bannerRef.current) {
+      tl.from(bannerRef.current, { autoAlpha: 0, scale: 0.85, y: 30, duration: 1.2, ease: 'power3.out' }, 0.5);
     }
   }, contentRef);
 
@@ -380,13 +332,13 @@ async function initializeHeroAnimations(contentRef, splineRef) {
 // ============================================================================
 export default function Hero() {
   const contentRef = useRef(null);
-  const splineRef = useRef(null);
+  const bannerRef = useRef(null);
 
   // Inicializar animaciones cuando el componente se monta
   useEffect(() => {
     let ctx = null;
     // inicializa y captura el contexto para cleanup
-    initializeHeroAnimations(contentRef, splineRef).then((c) => {
+    initializeHeroAnimations(contentRef, bannerRef).then((c) => {
       ctx = c;
     });
 
@@ -414,10 +366,8 @@ export default function Hero() {
           <HeroStats />
         </div>
 
-        {/* SPLINE 3D
-        <div ref={splineRef} className="w-full flex justify-center mt-6 lg:mt-0">
-          <HeroSpline />
-        </div> */}
+        {/* BANNER DE TIBURONES */}
+        <HeroBanner imageRef={bannerRef} />
 
       </div>
 
