@@ -1,0 +1,12 @@
+---
+import Hero from "../components/servicios/islands/Hero";
+import Ofertas from "../components/servicios/Ofertas.astro";
+import CTA from "../components/servicios/CTA.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Servicios – Hype Marketing Digital" description="Servicios completos de marketing digital, branding, desarrollo web y más para impulsar tu negocio.">
+  <Hero client:load />
+  <Ofertas />
+  <CTA />
+</Layout>

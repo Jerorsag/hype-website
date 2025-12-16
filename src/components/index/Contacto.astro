@@ -1,0 +1,138 @@
+---
+---
+
+<section 
+	id="contacto" 
+	class="w-full py-16 sm:py-24 lg:py-32 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8"
+	style="background: linear-gradient(to bottom, var(--color-hype-purple) 0%, var(--color-hype-blue) 100%)"
+>
+	<div class="max-w-3xl mx-auto text-center">
+		<!-- Título -->
+		<h2 
+			class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6"
+			style="font-family: var(--font-primary)"
+		>
+			Impulsemos tu marca{' '}
+			<span 
+				style="color: var(--color-hype-green); font-family: var(--font-secondary)"
+			>
+				hoy
+			</span>
+		</h2>
+
+		<!-- Descripción -->
+		<p 
+			class="text-base sm:text-lg text-white/90 mb-10 sm:mb-12 max-w-2xl mx-auto leading-relaxed"
+			style="font-family: var(--font-primary)"
+		>
+			Cuéntanos sobre tu proyecto y nos pondremos en marcha. Respuesta garantizada en menos de 24 horas.
+		</p>
+
+		<!-- Formulario -->
+		<form id="contact-form" class="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto">
+			<input
+				type="email"
+				id="email"
+				name="email"
+				placeholder="Tu email aquí"
+				required
+				class="flex-1 px-6 py-4 rounded-xl text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-purple-600"
+				style="font-family: var(--font-primary); background-color: rgba(255, 255, 255, 0.95); font-size: 1rem"
+			/>
+			<button
+				type="submit"
+				id="submit-button"
+				class="px-8 sm:px-10 py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-2 group whitespace-nowrap hover:bg-[#47FD27] hover:text-black hover:scale-105 hover:shadow-xl text-center transition-all duration-300 cursor-pointer"
+				style="background-color: white; color: #000; font-family: var(--font-primary); border: none; box-shadow: 0 8px 24px rgba(71, 253, 39, 0.3)"
+			>
+				Enviar
+				<span class="group-hover:translate-x-1 transition-transform duration-300">→</span>
+			</button>
+		</form>
+
+		<!-- Mensaje de éxito -->
+		<div id="success-message" class="hidden mt-6 max-w-xl mx-auto" style="display: none;">
+			<div class="bg-green-500 text-white px-6 py-4 rounded-xl flex items-center gap-3 shadow-lg">
+				<svg class="w-6 h-6 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+				</svg>
+				<p class="font-semibold" style="font-family: var(--font-primary)">
+					¡Email enviado correctamente! Te contactaremos pronto.
+				</p>
+			</div>
+		</div>
+
+		<!-- Texto de garantía -->
+		<p 
+			id="guarantee-text"
+			class="text-sm sm:text-base text-white/80 mt-8"
+			style="font-family: var(--font-primary)"
+		>
+			Respuesta en menos de 24 horas. Garantizado.
+		</p>
+	</div>
+</section>
+
+<script>
+	(function() {
+		function initContactForm() {
+			const form = document.getElementById('contact-form');
+			const successMessage = document.getElementById('success-message');
+			const guaranteeText = document.getElementById('guarantee-text');
+
+			if (!form) {
+				console.warn('Formulario de contacto no encontrado');
+				return;
+			}
+
+			form.addEventListener('submit', function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+				event.stopImmediatePropagation();
+
+				const formData = new FormData(form);
+				const email = formData.get('email');
+
+				if (email && email.trim()) {
+					console.log('Email enviado:', email);
+					
+					// Ocultar texto de garantía
+					if (guaranteeText) {
+						guaranteeText.style.display = 'none';
+					}
+					
+					// Mostrar mensaje de éxito
+					if (successMessage) {
+						successMessage.classList.remove('hidden');
+						successMessage.style.display = 'block';
+					}
+					
+					// Resetear formulario
+					form.reset();
+					
+					// Ocultar mensaje después de 5 segundos
+					setTimeout(function() {
+						if (successMessage) {
+							successMessage.classList.add('hidden');
+							successMessage.style.display = 'none';
+						}
+						if (guaranteeText) {
+							guaranteeText.style.display = 'block';
+							guaranteeText.classList.remove('hidden');
+						}
+					}, 5000);
+				} else {
+					console.warn('Email vacío o inválido');
+				}
+				
+				return false;
+			}, { capture: true });
+		}
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initContactForm);
+		} else {
+			initContactForm();
+		}
+	})();
+</script>

@@ -1,0 +1,152 @@
+---
+import { Menu, X } from 'lucide-react';
+---
+
+<header class="sticky top-0 w-full py-4 bg-white shadow-md z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+
+    <!-- Logo -->
+    <a href="/" class="flex items-center">
+      <img src="/images/logo.svg" alt="Hype" class="h-8 sm:h-10 w-auto" />
+    </a>
+
+    <!-- Navigation - Desktop -->
+    <nav class="hidden md:flex gap-8 text-gray-700 font-medium">
+      <a href="/" class="hover:text-black transition-colors duration-200">
+        Inicio
+      </a>
+      <a href="/servicios" class="hover:text-black transition-colors duration-200">
+        Servicios
+      </a>
+      <a href="/nosotros" class="hover:text-black transition-colors duration-200">
+        Nosotros
+      </a>
+    </nav>
+
+    <!-- CTA Button - Desktop -->
+    <a
+      href="/#contacto"
+      class="hidden md:inline-block px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200 transform hover:scale-105"
+    >
+      Contáctanos
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button
+      type="button"
+      id="mobile-menu-btn"
+      class="md:hidden p-2 text-gray-700 hover:text-black hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+      <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+  <nav id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200 mt-4">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 flex flex-col gap-4">
+      <a href="/" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
+        Inicio
+      </a>
+      <a href="/servicios" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
+        Servicios
+      </a>
+      <a href="/nosotros" class="text-gray-700 font-medium hover:text-black transition-colors py-2">
+        Nosotros
+      </a>
+      <a
+        href="/#contacto"
+        class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200 text-center"
+      >
+        Contáctanos
+      </a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  // Mobile menu functionality
+  class MobileMenu {
+    constructor() {
+      this.btn = document.getElementById('mobile-menu-btn');
+      this.menu = document.getElementById('mobile-menu');
+      this.menuIcon = document.getElementById('menu-icon');
+      this.closeIcon = document.getElementById('close-icon');
+      this.isOpen = false;
+      
+      if (this.btn && this.menu && this.menuIcon && this.closeIcon) {
+        this.init();
+      }
+    }
+    
+    init() {
+      // Toggle menu on button click
+      this.btn.onclick = (e) => {
+        e.stopPropagation();
+        this.toggle();
+      };
+      
+      // Close menu when clicking a link
+      const links = this.menu.querySelectorAll('a');
+      links.forEach(link => {
+        link.onclick = () => {
+          this.close();
+        };
+      });
+      
+      // Close menu when clicking outside
+      document.onclick = (e) => {
+        if (this.isOpen && !this.menu.contains(e.target) && !this.btn.contains(e.target)) {
+          this.close();
+        }
+      };
+      
+      // Close menu with ESC key
+      document.onkeydown = (e) => {
+        if (e.key === 'Escape' && this.isOpen) {
+          this.close();
+        }
+      };
+    }
+    
+    toggle() {
+      if (this.isOpen) {
+        this.close();
+      } else {
+        this.open();
+      }
+    }
+    
+    open() {
+      this.isOpen = true;
+      this.menu.classList.remove('hidden');
+      this.menuIcon.classList.add('hidden');
+      this.closeIcon.classList.remove('hidden');
+      this.btn.setAttribute('aria-expanded', 'true');
+    }
+    
+    close() {
+      this.isOpen = false;
+      this.menu.classList.add('hidden');
+      this.menuIcon.classList.remove('hidden');
+      this.closeIcon.classList.add('hidden');
+      this.btn.setAttribute('aria-expanded', 'false');
+    }
+  }
+  
+  // Initialize on DOMContentLoaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => new MobileMenu());
+  } else {
+    new MobileMenu();
+  }
+  
+  // Reinitialize on Astro page navigation
+  document.addEventListener('astro:page-load', () => new MobileMenu());
+</script>

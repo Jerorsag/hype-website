@@ -1,0 +1,64 @@
+---
+import { ChartNoAxesColumnIncreasing, Percent, Users, Zap } from 'lucide-react';
+---
+
+<section id="valor" class="w-full bg-gray-100 py-16 sm:py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Badge y Título -->
+    <div class="text-center mb-12 sm:mb-16">
+      <p class="text-sm sm:text-base font-semibold text-blue-600 mb-4 uppercase tracking-wider">
+        ¿Por qué elegimos?
+      </p>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-black" style="font-family: var(--font-primary)">
+        El <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent" style="font-family: var(--font-secondary)">partner digital</span> que necesitas
+      </h2>
+    </div>
+
+    <!-- Grid de Valores -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-8">
+      <!-- Valor 1: Creatividad -->
+      <div class="text-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-purple-600 flex items-center justify-center mb-6 mx-auto">
+          <Zap className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600">
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-3">Creatividad que rompe moldes</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Ideas frescas y originales que hacen que tu marca destaque del ruido digital.
+        </p>
+      </div>
+
+      <!-- Valor 2: Estrategia -->
+      <div class="text-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-purple-600 flex items-center justify-center mb-6 mx-auto">
+          <ChartNoAxesColumnIncreasing className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600">
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-3">Estrategias digitales que convierten</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Cada acción tiene un propósito. Métricas claras, resultados medibles.
+        </p>
+      </div>
+
+      <!-- Valor 3: Acompañamiento -->
+      <div class="text-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-purple-600 flex items-center justify-center mb-6 mx-auto">
+          <Users className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600">
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-3">Acompañamiento experto</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Un equipo dedicado que entiende tu negocio y camina contigo hacia el éxito.
+        </p>
+      </div>
+
+      <!-- Valor 4: Resultados -->
+      <div class="text-center">
+        <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-lg border-2 border-purple-600 flex items-center justify-center mb-6 mx-auto">
+          <Percent className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600">
+        </div>
+        <h3 class="text-lg sm:text-xl font-bold text-black mb-3">Resultados medibles</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Números reales que demuestran el impacto de nuestro trabajo en tu marca.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

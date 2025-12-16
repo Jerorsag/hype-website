@@ -1,0 +1,96 @@
+---
+import { ChartNoAxesColumn, Check, Code, Instagram, Keyboard, Smile  } from 'lucide-react';
+---
+
+<section id="servicios" class="w-full bg-white py-16 sm:py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Badge y Título -->
+    <div class="text-center mb-12 sm:mb-16">
+      <p class="text-sm sm:text-base font-semibold text-purple-600 mb-4 uppercase tracking-wider">
+        Nuestros Servicios
+      </p>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-black" style="font-family: var(--font-primary)">
+        Soluciones <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent" style="font-family: var(--font-secondary)">digitales</span> completas
+      </h2>
+      <p class="text-base sm:text-lg text-gray-600 mt-6 max-w-2xl mx-auto leading-relaxed">
+        Todo lo que tu marca necesita para brillar en el mundo digital, bajo un mismo techo y con un equipo apasionado.
+      </p>
+    </div>
+
+    <!-- Grid de Servicios -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
+      <!-- Servicio 1: Publicidad Digital -->
+      <div class="group p-8 sm:p-10 rounded-lg border border-gray-200 hover:border-purple-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-purple-600 flex items-center justify-center mb-6 group-hover:bg-purple-600 transition-colors duration-300">
+          <Keyboard className="w-7 h-7 sm:w-8 sm:h-8 text-purple-600 group-hover:text-white transition-colors duration-300" />
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-black mb-3">Publicidad Digital</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Campañas estratégicas en Google Ads, Meta Ads y más. Maximiza tu ROI con estrategias data-driven.
+        </p>
+      </div>
+
+      <!-- Servicio 2: Branding & Diseño -->
+      <div class="group p-8 sm:p-10 rounded-lg border border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+          <Smile className="w-7 h-7 sm:w-8 sm:h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-black mb-3">Branding & Diseño</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Identidad visual que destaca. Logos, manual de marca y diseño gráfico impactante.
+        </p>
+      </div>
+
+      <!-- Servicio 3: Social Media -->
+      <div class="group p-8 sm:p-10 rounded-lg border border-gray-200 hover:border-green-500 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-green-500 flex items-center justify-center mb-6 group-hover:bg-green-500 transition-colors duration-300">
+          <Instagram className="w-7 h-7 sm:w-8 sm:h-8 text-green-500 group-hover:text-white transition-colors duration-300">
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-black mb-3">Social Media</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Gestión integral de redes sociales. Contenido que conecta y comunidades que crecen.
+        </p>
+      </div>
+
+      <!-- Servicio 4: SEO & Contenidos -->
+      <div class="group p-8 sm:p-10 rounded-lg border border-gray-200 hover:border-purple-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-purple-600 flex items-center justify-center mb-6 group-hover:bg-purple-600 transition-colors duration-300">
+          <Check className="w-7 h-7 sm:w-8 sm:h-8 text-purple-600 group-hover:text-white transition-colors duration-300">
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-black mb-3">SEO & Contenidos</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Posicionamiento orgánico que perdura. Contenido estratégico que atrae y convierte.
+        </p>
+      </div>
+
+      <!-- Servicio 5: Analytics & Data -->
+      <div class="group p-8 sm:p-10 rounded-lg border border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-blue-600 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+          <ChartNoAxesColumn className="w-7 h-7 sm:w-8 sm:h-8 text-blue-600 group-hover:text-white transition-colors duration-300">
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-black mb-3">Analytics & Data</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Decisiones basadas en datos. Dashboards, reportes y optimización continua.
+        </p>
+      </div>
+
+      <!-- Servicio 6: Desarrollo Web -->
+      <div class="group p-8 sm:p-10 rounded-lg border border-gray-200 hover:border-green-500 hover:shadow-lg transition-all duration-300 cursor-pointer">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-lg border-2 border-green-500 flex items-center justify-center mb-6 group-hover:bg-green-500 transition-colors duration-300">
+          <Code className="w-7 h-7 sm:w-8 sm:h-8 text-green-500 group-hover:text-white transition-colors duration-300">
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-black mb-3">Desarrollo Web</h3>
+        <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+          Experiencias digitales rápidas, seguras y diseñadas para convertir visitantes en clientes.
+        </p>
+      </div>
+    </div>
+
+    <!-- CTA Button -->
+    <div class="flex justify-center mt-16 sm:mt-20">
+      <a href="/servicios" class="px-8 sm:px-10 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-full hover:shadow-xl hover:scale-102 transition-all duration-300">
+        Ver todos los servicios →
+      </a>
+    </div>
+  </div>
+</section>

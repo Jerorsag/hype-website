@@ -1,0 +1,20 @@
+---
+import Hero from "../components/nosotros/islands/Hero";
+import Historia from "../components/nosotros/Historia.astro";
+import MisionVision from "../components/nosotros/MisionVision.astro";
+import Equipo from "../components/nosotros/Equipo.astro";
+import Metodologia from "../components/nosotros/Metodologia.astro";
+import Valores from "../components/nosotros/Valores.astro";
+import CTA from "../components/nosotros/CTA.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Nosotros – Hype Marketing Digital"  description="Equipo de Hype marketing digital, branding, desarrollo web y más para impulsar tu negocio.">
+  <Hero client:idle />
+  <Historia />
+  <MisionVision />
+  <Equipo />
+  <Metodologia />
+  <Valores />
+  <CTA />
+</Layout>

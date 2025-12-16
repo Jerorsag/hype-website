@@ -1,18 +1,104 @@
 ---
 import "../styles/global.css";
-const { title = "Hype Marketing Digital" } = Astro.props;
+import { ClientRouter } from 'astro:transitions';
+import Header from "../components/global/Header.astro";
+import Footer from "../components/global/Footer.astro";
+import WhatsAppButton from "../components/ui/WhatsAppButton.astro";
+
+const { title = "Hype Marketing Digital", description = "Agencia de marketing digital" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
 		<title>{title}</title>
+		<ClientRouter />
 	</head>
-	<body>
-		<slot />
-	</body>
+	<body class="min-h-screen flex flex-col bg-white text-black">
+    <Header />
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <Footer />
+    
+    <!-- Botón flotante de WhatsApp -->
+    <WhatsAppButton />
+  </body>
 </html>
+
+<script is:inline>
+  // Smooth scroll global para todos los links con hash
+  function initSmoothScroll() {
+    function smoothScrollTo(targetId) {
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) {
+        console.warn('Target element not found:', targetId);
+        return false;
+      }
+
+      const headerOffset = 80;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      
+      return true;
+    }
+
+    document.addEventListener('click', function(e) {
+      // Buscar el link más cercano
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      // Manejar links con hash (#contacto, /#contacto, etc.)
+      let targetId = null;
+      
+      // Si el href empieza con #
+      if (href.startsWith('#')) {
+        targetId = href.substring(1);
+      }
+      // Si el href es /#algo y estamos en la página principal
+      else if (href.startsWith('/#') && (window.location.pathname === '/' || window.location.pathname === '')) {
+        targetId = href.substring(2);
+      }
+      // Si el href es /ruta#algo y coincide con la ruta actual
+      else if (href.includes('#')) {
+        const [path, hash] = href.split('#');
+        if (path === window.location.pathname || (path === '/' && window.location.pathname === '/')) {
+          targetId = hash;
+        }
+      }
+
+      // Si encontramos un targetId, hacer smooth scroll
+      if (targetId && targetId.trim()) {
+        const scrolled = smoothScrollTo(targetId);
+        if (scrolled) {
+          e.preventDefault();
+        }
+      }
+    }, { passive: false });
+  }
+
+  // Inicializar en carga
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSmoothScroll);
+  } else {
+    initSmoothScroll();
+  }
+
+  // Reinicializar en navegación de Astro
+  document.addEventListener('astro:page-load', initSmoothScroll);
+</script>
