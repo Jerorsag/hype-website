@@ -1,0 +1,81 @@
+---
+import { Search, Lightbulb, Rocket, BarChart } from 'lucide-react';
+---
+
+<section id="metodologia" class="w-full bg-gray-50 py-16 sm:py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center mb-12 sm:mb-16">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-4">
+        Nuestra <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent" style="font-family: var(--font-secondary)">metodología</span>
+      </h2>
+      <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+        Un proceso probado que transforma ideas en resultados tangibles y medibles.
+      </p>
+    </div>
+
+    {/* Timeline Horizontal */}
+    <div class="relative">
+      {/* Línea horizontal - visible solo en desktop */}
+      <div class="hidden lg:block absolute left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-blue-600 via-orange-500 to-purple-600" style="top: 2.5rem;"></div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 relative z-10">
+        
+        {/* Paso 1 */}
+        <div class="flex flex-col items-center text-center h-full">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center mb-4 shadow-xl border-4 border-white flex-shrink-0">
+            <Search className="w-10 h-10 text-white" />
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-2 border-purple-200 hover:border-purple-600 hover:shadow-xl transition-all duration-300 w-full cursor-pointer flex flex-col h-full">
+            <h3 class="text-lg sm:text-xl font-bold text-black mb-2">1. Investigación</h3>
+            <p class="text-sm sm:text-base text-gray-600 leading-relaxed flex-grow">
+              Analizamos tu mercado, competencia y audiencia para identificar oportunidades clave.
+            </p>
+          </div>
+        </div>
+
+        {/* Paso 2 */}
+        <div class="flex flex-col items-center text-center h-full">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center mb-4 shadow-xl border-4 border-white flex-shrink-0">
+            <Lightbulb className="w-10 h-10 text-white" />
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-2 border-blue-200 hover:border-blue-600 hover:shadow-xl transition-all duration-300 w-full cursor-pointer flex flex-col h-full">
+            <h3 class="text-lg sm:text-xl font-bold text-black mb-2">2. Estrategia</h3>
+            <p class="text-sm sm:text-base text-gray-600 leading-relaxed flex-grow">
+              Diseñamos un plan de acción personalizado con objetivos claros y medibles.
+            </p>
+          </div>
+        </div>
+
+        {/* Paso 3 */}
+        <div class="flex flex-col items-center text-center h-full">
+          <div class="w-20 h-20 rounded-full flex items-center justify-center mb-4 shadow-xl border-4 border-white flex-shrink-0" style="background: linear-gradient(to bottom right, var(--color-hype-orange), #ff9500)">
+            <Rocket className="w-10 h-10 text-white" />
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-2 border-orange-200 hover:shadow-xl transition-all duration-300 w-full cursor-pointer flex flex-col h-full" style="border-color: #ffb366;">
+            <h3 class="text-lg sm:text-xl font-bold text-black mb-2">3. Ejecución</h3>
+            <p class="text-sm sm:text-base text-gray-600 leading-relaxed flex-grow">
+              Implementamos las tácticas con precisión de tiburón: rápido, eficaz y sin errores.
+            </p>
+          </div>
+        </div>
+
+        {/* Paso 4 */}
+        <div class="flex flex-col items-center text-center h-full">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center mb-4 shadow-xl border-4 border-white flex-shrink-0">
+            <BarChart className="w-10 h-10 text-white" />
+          </div>
+          <div class="bg-white p-6 rounded-xl shadow-md border-2 border-purple-200 hover:border-purple-600 hover:shadow-xl transition-all duration-300 w-full cursor-pointer flex flex-col h-full">
+            <h3 class="text-lg sm:text-xl font-bold text-black mb-2">4. Optimización</h3>
+            <p class="text-sm sm:text-base text-gray-600 leading-relaxed flex-grow">
+              Monitoreamos, analizamos y ajustamos constantemente para maximizar resultados.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+

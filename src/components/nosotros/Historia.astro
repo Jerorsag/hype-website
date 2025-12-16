@@ -1,0 +1,69 @@
+---
+import { TrendingUp, Users, Award, Zap } from 'lucide-react';
+---
+
+<section id="historia" class="w-full bg-white py-16 sm:py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      
+      <!-- Historia -->
+      <div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-black mb-6">
+          Nuestra <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent" style="font-family: var(--font-secondary)">historia</span>
+        </h2>
+        <div class="space-y-4 text-base sm:text-lg text-gray-700 leading-relaxed">
+          <p>
+            Comenzamos como un grupo de apasionados del marketing digital, decididos a cambiar la forma en que las marcas se comunican en línea.
+          </p>
+          <p>
+            Desde nuestros inicios, nos hemos caracterizado por nuestra <strong>mentalidad de tiburón</strong>: agresivos en la estrategia, precisos en la ejecución y siempre en movimiento hacia el siguiente objetivo.
+          </p>
+          <p>
+            Hoy, somos un equipo consolidado que ha ayudado a decenas de empresas a dominar sus mercados digitales con estrategias innovadoras y resultados medibles.
+          </p>
+        </div>
+      </div>
+
+      <!-- Estadísticas -->
+      <div class="grid grid-cols-2 gap-6 sm:gap-8">
+        
+        <!-- Stat 1 -->
+        <div class="p-6 sm:p-8 rounded-xl bg-gradient-to-br from-purple-50 via-purple-100 to-blue-50 border-2 border-purple-200 hover:border-purple-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-600 to-purple-700 flex items-center justify-center mb-4 shadow-md">
+            <TrendingUp className="w-7 h-7 text-white" />
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">150+</h3>
+          <p class="text-sm sm:text-base text-gray-700 font-medium">Proyectos completados</p>
+        </div>
+
+        <!-- Stat 2 -->
+        <div class="p-6 sm:p-8 rounded-xl bg-gradient-to-br from-blue-50 via-blue-100 to-purple-50 border-2 border-blue-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center mb-4 shadow-md">
+            <Users className="w-7 h-7 text-white" />
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-2">80+</h3>
+          <p class="text-sm sm:text-base text-gray-700 font-medium">Clientes satisfechos</p>
+        </div>
+
+        <!-- Stat 3 -->
+        <div class="p-6 sm:p-8 rounded-xl bg-gradient-to-br from-orange-50 via-orange-100 to-yellow-50 border-2 border-orange-200 hover:border-orange-500 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-4 shadow-md" style="background: linear-gradient(to bottom right, var(--color-hype-orange), #ff9500)">
+            <Award className="w-7 h-7 text-white" />
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-bold mb-2" style="background: linear-gradient(to right, var(--color-hype-orange), #ff9500); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">5+</h3>
+          <p class="text-sm sm:text-base text-gray-700 font-medium">Años de experiencia</p>
+        </div>
+
+        <!-- Stat 4 -->
+        <div class="p-6 sm:p-8 rounded-xl bg-gradient-to-br from-green-50 via-green-100 to-blue-50 border-2 border-green-200 hover:border-green-600 hover:shadow-lg transition-all duration-300 cursor-pointer">
+          <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-green-600 to-green-700 flex items-center justify-center mb-4 shadow-md">
+            <Zap className="w-7 h-7 text-white" />
+          </div>
+          <h3 class="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent mb-2">300%</h3>
+          <p class="text-sm sm:text-base text-gray-700 font-medium">ROI promedio</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
