@@ -7,14 +7,14 @@ import { MoveDown } from 'lucide-react';
 function HeroBadge() {
   return (
     <div 
-      className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 w-fit"
+      className="hero-badge inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 w-fit"
     >
       <span 
-        className="inline-block w-2 h-2 rounded-full"
+        className="inline-block w-1.5 h-1.5 rounded-full"
         style={{ backgroundColor: 'var(--color-hype-green)' }}
       />
       <span 
-        className="text-sm font-medium text-white"
+        className="text-xs font-medium text-white"
         style={{ fontFamily: 'var(--font-primary)' }}
       >
         Agencia de Marketing Digital
@@ -29,7 +29,7 @@ function HeroBadge() {
 function HeroTitle() {
   return (
     <h1 
-      className="hero-title text-4xl sm:text-5xl lg:text-6xl leading-tight"
+      className="hero-title text-2xl sm:text-3xl lg:text-4xl leading-tight"
       style={{ 
         fontFamily: 'var(--font-primary)',
         color: 'white',
@@ -40,7 +40,7 @@ function HeroTitle() {
       <br />
       ESTÁ EN REDES SOCIALES,
       <br />
-      <span className="font-bold text-6xl sm:text-7xl lg:text-8xl" style={{ color: 'text-white', fontFamily: 'var(--font-secondary)' }}>
+      <span className="font-bold text-4xl sm:text-5xl lg:text-6xl" style={{ color: 'text-white', fontFamily: 'var(--font-secondary)' }}>
         ya no existe.
       </span>
     </h1>
@@ -53,7 +53,7 @@ function HeroTitle() {
 function HeroDescription() {
   return (
     <p 
-      className="hero-description text-base sm:text-lg text-gray-200 max-w-lg leading-relaxed"
+      className="hero-description text-sm sm:text-base text-gray-200 max-w-lg leading-relaxed"
       style={{ fontFamily: 'var(--font-primary)', willChange: 'transform, opacity' }}
     >
       En <span className="font-bold">Hype Marketing Digital</span> ayudamos a marcas y emprendedores a crecer con estrategias digitales auténticas, creativas y enfocadas en resultados.
@@ -116,7 +116,7 @@ function HeroButtons() {
       <a 
         ref={primaryRef}
         href="/#contacto"
-        className="hero-button hero-button-primary flex-1 sm:w-auto px-4 sm:px-8 py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-3 group whitespace-nowrap hover:bg-[#47FD27] hover:text-black text-center"
+        className="hero-button hero-button-primary flex-1 sm:w-auto px-4 sm:px-6 py-3 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-3 group whitespace-nowrap hover:bg-[#47FD27] hover:text-black text-center"
         style={{
           backgroundColor: 'white',
           color: '#000',
@@ -143,7 +143,7 @@ function HeroButtons() {
           cursor: 'pointer',
           transform: 'translateZ(0) scale(1)'
         }}
-        className="hero-button hero-button-secondary flex-1 sm:w-auto px-4 sm:px-8 py-4 rounded-xl font-bold text-base sm:text-lg whitespace-nowrap hover:border-white hover:border-4 text-center"
+        className="hero-button hero-button-secondary flex-1 sm:w-auto px-4 sm:px-6 py-3 rounded-xl font-bold text-sm sm:text-base whitespace-nowrap hover:border-white hover:border-4 text-center"
       >
         Servicios
       </a>
@@ -157,13 +157,13 @@ function HeroButtons() {
 function HeroStats() {
   return (
     <div 
-      className="flex flex-row sm:grid sm:grid-cols-3 gap-4 sm:gap-8 pt-10 border-t text-center items-center"
+      className="flex flex-row sm:grid sm:grid-cols-3 gap-3 sm:gap-6 pt-6 border-t text-center items-center"
       style={{ borderColor: 'rgba(255, 255, 255, 0.15)', willChange: 'transform, opacity' }}
     >
       {/* Stat 1: Proyectos */}
-      <div className="hero-stat flex-1 flex flex-col items-center gap-2">
+      <div className="hero-stat flex-1 flex flex-col items-center gap-1">
         <span 
-          className="text-2xl sm:text-4xl font-bold"
+          className="text-xl sm:text-2xl lg:text-3xl font-bold"
           style={{
             fontFamily: 'var(--font-secondary)',
             color: 'var(--color-hype-green)'
@@ -172,7 +172,7 @@ function HeroStats() {
           150+
         </span>
         <span 
-          className="text-xs sm:text-sm text-gray-300 font-medium"
+          className="text-xs text-gray-300 font-medium"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           Proyectos exitosos
@@ -180,9 +180,9 @@ function HeroStats() {
       </div>
 
       {/* Stat 2: Clientes */}
-      <div className="hero-stat flex-1 flex flex-col items-center gap-2">
+      <div className="hero-stat flex-1 flex flex-col items-center gap-1">
         <span 
-          className="text-2xl sm:text-4xl font-bold"
+          className="text-xl sm:text-2xl lg:text-3xl font-bold"
           style={{
             fontFamily: 'var(--font-secondary)',
             color: 'var(--color-hype-orange)'
@@ -191,7 +191,7 @@ function HeroStats() {
           98%
         </span>
         <span 
-          className="text-xs sm:text-sm text-gray-300 font-medium"
+          className="text-xs text-gray-300 font-medium"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           Clientes satisfechos
@@ -199,9 +199,9 @@ function HeroStats() {
       </div>
 
       {/* Stat 3: Experiencia */}
-      <div className="hero-stat flex-1 flex flex-col items-center gap-2">
+      <div className="hero-stat flex-1 flex flex-col items-center gap-1">
         <span 
-          className="text-2xl sm:text-4xl font-bold "
+          className="text-xl sm:text-2xl lg:text-3xl font-bold "
           style={{
             fontFamily: 'var(--font-secondary)',
             color: 'var(--color-hype-yellow)'
@@ -210,7 +210,7 @@ function HeroStats() {
           5+
         </span>
         <span 
-          className="text-xs sm:text-sm text-gray-300 font-medium"
+          className="text-xs text-gray-300 font-medium"
           style={{ fontFamily: 'var(--font-primary)' }}
         >
           Años de experiencia
@@ -261,7 +261,7 @@ function HeroBanner({ imageRef }) {
     >
       <div 
         ref={imageRef}
-        className="relative w-full max-w-2xl"
+        className="relative w-full max-w-xl"
         style={{
           filter: 'drop-shadow(0 20px 40px rgba(71, 253, 39, 0.25))',
         }}
@@ -350,15 +350,15 @@ export default function Hero() {
 
   return (
     <section 
-      className="hero-section relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-12 sm:py-16"
+      className="hero-section relative w-full min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-6 sm:py-8"
       style={{
         background: `linear-gradient(to bottom, var(--color-hype-purple) 0%, var(--color-hype-blue) 100%)`,
       }}
     >
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
         
         {/* CONTENIDO PRINCIPAL */}
-        <div ref={contentRef} className="hero-content flex flex-col gap-8">
+        <div ref={contentRef} className="hero-content flex flex-col gap-4 sm:gap-5">
           <HeroBadge />
           <HeroTitle />
           <HeroDescription />
