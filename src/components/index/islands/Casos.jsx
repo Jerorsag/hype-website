@@ -253,16 +253,19 @@ export default function Casos() {
 												slideRefs.current[i] = el;
 											}}
 											data-slide-index={i}
-											className="w-screen h-full flex justify-center items-center flex-shrink-0 snap-start"
-											style={{ paddingLeft: '0.75rem', paddingRight: '0.75rem' }}
+											className="w-screen h-full flex justify-center items-center flex-shrink-0"
+											style={{ 
+												scrollSnapAlign: 'center',
+												scrollSnapStop: 'always'
+											}}
 										>
 											<div 
 												className="flex items-center justify-center overflow-hidden"
 												style={{
-													width: '100%',
-													maxWidth: 'calc(100vw - 1.5rem)',
-													aspectRatio: '9 / 16',
-													maxHeight: '100%'
+													width: 'calc(100vw - 1.5rem)',
+													height: '100%',
+													maxHeight: '100%',
+													marginInline: 'auto'
 												}}
 											>
 												<video 
@@ -278,9 +281,10 @@ export default function Casos() {
 													playsInline 
 													autoPlay
 													preload="auto"
-													className="w-full h-full object-cover"
+													className="w-full h-full object-contain"
 													style={{ 
-														objectPosition: 'center center'
+														objectPosition: 'center center',
+														aspectRatio: '9 / 16'
 													}}
 													onLoadedMetadata={(e) => {
 														playVideo(e.target);
@@ -307,10 +311,16 @@ export default function Casos() {
 									<button
 										key={`indicator-${i}`}
 										onClick={() => {
-											if (containerRef.current) {
-												const containerWidth = window.innerWidth;
-												containerRef.current.scrollTo({
-													left: containerWidth * i,
+											if (containerRef.current && slideRefs.current[i]) {
+												const slide = slideRefs.current[i];
+												const container = containerRef.current;
+												const containerRect = container.getBoundingClientRect();
+												const slideRect = slide.getBoundingClientRect();
+												// Calcular posición para centrar el slide
+												const scrollLeft = slide.offsetLeft - (containerRect.width / 2) + (slideRect.width / 2);
+												
+												container.scrollTo({
+													left: scrollLeft,
 													behavior: 'smooth'
 												});
 											}
