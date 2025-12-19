@@ -268,7 +268,7 @@ function HeroBanner({ imageRef }) {
       >
         <div ref={floatRef}>
           <img 
-            src="/images/tiburones/banner.jpeg"
+            src="/images/tiburones/banner.png"
             alt="Equipo Hype - Tiburones del Marketing Digital"
             className="w-full h-auto rounded-2xl object-cover shadow-2xl hover:scale-105 transition-transform duration-700 ease-out"
             style={{
@@ -375,6 +375,16 @@ export default function Hero() {
       <a href="#servicios" aria-label="Ir a Servicios" className="hype-scroll-hint absolute left-1/2 transform -translate-x-1/2 bottom-6 z-30 cursor-pointer">
         <MoveDown aria-hidden="true" className="text-white" />
       </a>
+
+      {/* Cohete decorativo - Esquina superior derecha */}
+      <div className="absolute top-8 right-4 sm:right-8 lg:right-12 z-0 opacity-60 pointer-events-none">
+        <img 
+          src="/images/cohetes/cohete-white.svg" 
+          alt="" 
+          className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
+          aria-hidden="true"
+        />
+      </div>
 
     </section>
   );

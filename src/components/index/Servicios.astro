@@ -2,8 +2,18 @@
 import { Video, Camera, Instagram, Palette, Lightbulb, Code } from 'lucide-react';
 ---
 
-<section id="servicios" class="w-full bg-white py-16 sm:py-24 lg:py-32">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="servicios" class="w-full bg-white py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+  <!-- Cohete decorativo - Esquina superior derecha -->
+  <div class="absolute top-12 right-4 sm:right-8 lg:right-12 z-0 opacity-40 pointer-events-none">
+    <img 
+      src="/images/cohetes/cohete-primary.svg" 
+      alt="" 
+      class="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
+      aria-hidden="true"
+    />
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Badge y Título -->
     <div class="text-center mb-12 sm:mb-16">
       <p class="text-sm sm:text-base font-semibold text-purple-600 mb-4 uppercase tracking-wider">

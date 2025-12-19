@@ -32,12 +32,22 @@ export default function Hero() {
 
 	return (
 		<section 
-			className="hero-section relative w-full min-h-[70vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24"
+			className="hero-section relative w-full min-h-[70vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-24 overflow-hidden"
 			style={{
 				background: 'linear-gradient(to bottom, var(--color-hype-purple) 0%, var(--color-hype-blue) 100%)',
 			}}
 		>
-			<div ref={contentRef} className="max-w-4xl mx-auto w-full text-center">
+			{/* Cohete decorativo - Esquina superior derecha */}
+			<div className="absolute top-8 right-4 sm:right-8 lg:right-12 z-0 opacity-60 pointer-events-none">
+				<img 
+					src="/images/cohetes/cohete-white.svg" 
+					alt="" 
+					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
+					aria-hidden="true"
+				/>
+			</div>
+
+			<div ref={contentRef} className="max-w-4xl mx-auto w-full text-center relative z-10">
 				{/* Badge */}
 				<div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 w-fit mx-auto">
 					<span 
