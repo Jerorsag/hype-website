@@ -7,6 +7,8 @@ export default function Casos() {
 	const videoRefs = useRef({});
 	const [videos, setVideos] = useState([]);
 	const [isMobile, setIsMobile] = useState(false);
+	const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+	const slideRefs = useRef([]);
 
 	// Detectar si es móvil
 	useEffect(() => {
@@ -55,71 +57,44 @@ export default function Casos() {
 		});
 	}, []);
 
-	// Animación horizontal en móvil con GSAP + ScrollTrigger (1 slide por vista + snap)
+	// Scroll horizontal nativo en móvil con IntersectionObserver para detectar video activo
 	useEffect(() => {
-		if (!isMobile || !trackRef.current || !sectionRef.current || videos.length === 0) return;
+		if (!isMobile || !containerRef.current || videos.length === 0) return;
 
-		let ctx = null;
-		let isMounted = true;
+		const container = containerRef.current;
+		const slides = slideRefs.current.filter(Boolean);
 
-		(async () => {
-			try {
-				const gsapModule = await import('gsap');
-				const { ScrollTrigger } = await import('gsap/ScrollTrigger');
-				const gsap = gsapModule.default;
+		if (slides.length === 0) return;
 
-				if (!isMounted) return;
+		// IntersectionObserver para detectar qué video está visible
+		const observerOptions = {
+			root: container,
+			rootMargin: '0px',
+			threshold: 0.5 // Video debe estar al menos 50% visible
+		};
 
-				// Registrar plugin una sola vez
-				if (!gsap.core?.globals()?.ScrollTrigger) {
-					gsap.registerPlugin(ScrollTrigger);
+		const observerCallback = (entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const index = parseInt(entry.target.getAttribute('data-slide-index'), 10);
+					if (!isNaN(index)) {
+						setActiveVideoIndex(index);
+					}
 				}
+			});
+		};
 
-				const section = sectionRef.current;
-				const track = trackRef.current;
+		const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-				if (!section || !track || !isMounted) return;
-
-				// Slides individuales
-				const slides = track.querySelectorAll('[data-caso-slide]');
-				const totalSlides = slides.length || videos.length || 1;
-
-				ctx = gsap.context(() => {
-					gsap.set(track, { xPercent: 0 });
-
-					// ScrollTrigger: pin de la sección y desplazamiento horizontal
-					gsap.to(track, {
-						xPercent: -100 * (totalSlides - 1),
-						ease: 'none',
-						scrollTrigger: {
-							trigger: section,
-							start: 'top top',
-							end: () => `+=${window.innerHeight * totalSlides}`,
-							scrub: 1, // Más suave en mobile
-							pin: true,
-							anticipatePin: 1,
-							invalidateOnRefresh: true,
-							snap: {
-								snapTo: totalSlides > 1 ? 1 / (totalSlides - 1) : 1,
-								duration: { min: 0.3, max: 0.6 },
-								delay: 0.2,
-								ease: 'power2.out'
-							}
-						}
-					});
-				}, section);
-			} catch (err) {
-				if (isMounted) {
-					console.error('Error inicializando GSAP ScrollTrigger en Casos:', err);
-				}
+		// Observar todos los slides
+		slides.forEach((slide) => {
+			if (slide) {
+				observer.observe(slide);
 			}
-		})();
+		});
 
 		return () => {
-			isMounted = false;
-			if (ctx && typeof ctx.revert === 'function') {
-				ctx.revert();
-			}
+			observer.disconnect();
 		};
 	}, [videos, isMobile]);
 
@@ -166,14 +141,11 @@ export default function Casos() {
 		<section 
 			ref={sectionRef} 
 			id="casos" 
-			className="w-full bg-gray-50 pt-2 sm:pt-24 lg:pt-28 pb-6 sm:pb-10 overflow-hidden relative"
+			className="w-full bg-gray-50 pt-12 sm:pt-24 lg:pt-28 pb-6 sm:pb-10 overflow-hidden relative"
 		>
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-				{/* Título y descripción - Fijo en móvil, normal en desktop */}
-				<div 
-					className={`text-center mb-2 sm:mb-6 ${isMobile ? 'sticky top-20 z-30 bg-gray-50 pb-3 pt-2' : ''}`}
-					style={isMobile ? { backdropFilter: 'blur(10px)', backgroundColor: 'rgba(249, 250, 251, 0.95)' } : {}}
-				>
+				{/* Título y descripción */}
+				<div className="text-center mb-2 sm:mb-6">
 					<p 
 						className="text-sm sm:text-base font-semibold uppercase tracking-wide mb-2"
 						style={{ color: 'var(--color-hype-green)' }}
@@ -248,68 +220,111 @@ export default function Casos() {
 					)}
 				</div>
 
-				{/* Mobile: experiencia inmersiva horizontal (1 video por vista) */}
-				<div className="sm:hidden relative">
+				{/* Mobile: Scroll horizontal nativo con swipe */}
+				<div className="sm:hidden">
 					{videos.length > 0 ? (
-						<div 
-							ref={containerRef}
-							className="overflow-hidden rounded-2xl"
-							style={{ height: '100vh' }}
-						>
+						<>
+							{/* Contenedor de videos con scroll horizontal */}
 							<div 
-								ref={trackRef} 
-								className="flex will-change-transform h-full"
-								style={{ transform: 'translateX(0px)' }}
+								ref={containerRef}
+								className="overflow-x-scroll overflow-y-hidden snap-x snap-mandatory"
+								style={{ 
+									height: 'calc(100vh - 280px)',
+									scrollbarWidth: 'none',
+									msOverflowStyle: 'none',
+									WebkitOverflowScrolling: 'touch'
+								}}
 							>
-								{videos.map((video, i) => (
-									<div 
-										key={`mobile-video-${i}`} 
-										data-caso-slide
-										className="w-full h-full flex justify-center items-start flex-shrink-0 px-4 pt-2"
-									>
-										<div className="w-full flex items-center justify-center rounded-2xl overflow-hidden bg-black/80">
-											<video 
-												ref={(el) => {
-													if (el) {
-														videoRefs.current[`mobile-${i}`] = el;
-														// Intentar reproducir inmediatamente cuando se asigna el ref
-														setTimeout(() => playVideo(el), 200);
-													}
-												}}
-												src={video} 
-												muted 
-												loop 
-												playsInline 
-												autoPlay
-												preload="auto"
-												style={{ 
-													display: 'block',
-													height: 'calc(100vh - 140px)',
-													width: 'auto',
+								<style>{`
+									[data-casos-scroll-container]::-webkit-scrollbar {
+										display: none;
+									}
+								`}</style>
+								<div 
+									ref={trackRef} 
+									data-casos-scroll-container
+									className="flex h-full"
+									style={{ width: `${videos.length * 100}vw` }}
+								>
+									{videos.map((video, i) => (
+										<div 
+											key={`mobile-video-${i}`} 
+											ref={(el) => {
+												slideRefs.current[i] = el;
+											}}
+											data-slide-index={i}
+											className="w-screen h-full flex justify-center items-center flex-shrink-0 snap-start"
+											style={{ paddingLeft: '0.75rem', paddingRight: '0.75rem' }}
+										>
+											<div 
+												className="flex items-center justify-center overflow-hidden"
+												style={{
+													width: '100%',
+													maxWidth: 'calc(100vw - 1.5rem)',
 													aspectRatio: '9 / 16',
-													maxWidth: '90vw',
-													borderRadius: '1.2rem',
-													objectFit: 'cover',
-													backgroundColor: '#000'
+													maxHeight: '100%'
 												}}
-												onLoadedMetadata={(e) => {
-													playVideo(e.target);
-												}}
-												onCanPlay={(e) => {
-													playVideo(e.target);
-												}}
-												onLoadedData={(e) => {
-													playVideo(e.target);
-												}}
-												onError={(e) => {
-													console.error('❌ Error cargando video:', video, e.target.error);
-												}}
-											/>
+											>
+												<video 
+													ref={(el) => {
+														if (el) {
+															videoRefs.current[`mobile-${i}`] = el;
+															setTimeout(() => playVideo(el), 200);
+														}
+													}}
+													src={video} 
+													muted 
+													loop 
+													playsInline 
+													autoPlay
+													preload="auto"
+													className="w-full h-full object-cover"
+													style={{ 
+														objectPosition: 'center center'
+													}}
+													onLoadedMetadata={(e) => {
+														playVideo(e.target);
+													}}
+													onCanPlay={(e) => {
+														playVideo(e.target);
+													}}
+													onLoadedData={(e) => {
+														playVideo(e.target);
+													}}
+													onError={(e) => {
+														console.error('❌ Error cargando video:', video, e.target.error);
+													}}
+												/>
+											</div>
 										</div>
-									</div>
+									))}
+								</div>
+							</div>
+
+							{/* Indicadores (dots) - Debajo del carrusel, siempre visibles */}
+							<div className="flex justify-center items-center gap-2 py-4">
+								{videos.map((_, i) => (
+									<button
+										key={`indicator-${i}`}
+										onClick={() => {
+											if (containerRef.current) {
+												const containerWidth = window.innerWidth;
+												containerRef.current.scrollTo({
+													left: containerWidth * i,
+													behavior: 'smooth'
+												});
+											}
+										}}
+										className={`transition-all duration-300 rounded-full ${
+											i === activeVideoIndex 
+												? 'w-2.5 h-2.5 bg-purple-600' 
+												: 'w-2 h-2 bg-gray-400 opacity-60'
+										}`}
+										aria-label={`Video ${i + 1} de ${videos.length}`}
+									/>
 								))}
 							</div>
-						</div>
+						</>
 					) : (
 						<div className="text-center py-12">
 							<p className="text-gray-500">Cargando videos...</p>
