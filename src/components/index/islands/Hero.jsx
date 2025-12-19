@@ -268,7 +268,7 @@ function HeroBanner({ imageRef }) {
       >
         <div ref={floatRef}>
           <img 
-            src="/images/tiburones/banner.jpeg"
+            src="/images/tiburones/banner.png"
             alt="Equipo Hype - Tiburones del Marketing Digital"
             className="w-full h-auto rounded-2xl object-cover shadow-2xl hover:scale-105 transition-transform duration-700 ease-out"
             style={{

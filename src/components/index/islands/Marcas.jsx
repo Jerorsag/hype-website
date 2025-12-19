@@ -7,12 +7,12 @@ export default function Marcas() {
 
   // Lista de marcas - cambia las rutas según tus imágenes en public/images/marcas
   const marcas = [
-    { id: 1, name: 'Marca 1', src: '/images/marcas/pepsi.png' },
-    { id: 2, name: 'Marca 2', src: '/images/marcas/hp.png' },
-    { id: 3, name: 'Marca 3', src: '/images/marcas/starbucks.png' },
-    { id: 4, name: 'Marca 4', src: '/images/marcas/ventanas.png' },
-    { id: 5, name: 'Marca 5', src: '/images/marcas/whatsapp.png' },
-    { id: 6, name: 'Marca 6', src: '/images/marcas/youtube.png' }
+    { id: 1, name: 'Marca 1', src: '/images/marcas-hype/ALITAS MX.png' },
+    { id: 2, name: 'Marca 2', src: '/images/marcas-hype/BOGOTANAS.png' },
+    { id: 3, name: 'Marca 3', src: '/images/marcas-hype/blix.png' },
+    { id: 4, name: 'Marca 4', src: '/images/marcas-hype/HL.png' },
+    { id: 5, name: 'Marca 5', src: '/images/marcas-hype/TERPEL.png' },
+    { id: 6, name: 'Marca 6', src: '/images/marcas-hype/RODADA.png' }
   ];
 
   useEffect(() => {
