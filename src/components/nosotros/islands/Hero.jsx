@@ -112,6 +112,38 @@ export default function Hero() {
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
 							/>
 						</div>
+						<div className="shark-container">
+							<img 
+								src="/images/tiburones/cm.png" 
+								alt="Community Manager Tiburón" 
+								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
+								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
+							/>
+						</div>
+						<div className="shark-container">
+							<img 
+								src="/images/tiburones/kami.png" 
+								alt="Camila Tiburón" 
+								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
+								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
+							/>
+						</div>
+						<div className="shark-container">
+							<img 
+								src="/images/tiburones/villa.png" 
+								alt="Villa Tiburón" 
+								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
+								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
+							/>
+						</div>
+						<div className="shark-container">
+							<img 
+								src="/images/tiburones/ladino.png" 
+								alt="Steven Tiburón" 
+								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
+								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
+							/>
+						</div>
 					</div>
 				</div>
 			</div>
