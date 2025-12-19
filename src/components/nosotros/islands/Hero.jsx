@@ -52,7 +52,17 @@ export default function Hero() {
 				background: 'linear-gradient(to bottom, var(--color-hype-purple) 0%, var(--color-hype-blue) 100%)',
 			}}
 		>
-			<div ref={contentRef} className="max-w-7xl mx-auto w-full">
+			{/* Cohete decorativo - Esquina superior derecha */}
+			<div className="absolute top-8 right-4 sm:right-8 lg:right-12 z-0 opacity-60 pointer-events-none">
+				<img 
+					src="/images/cohetes/cohete-white.svg" 
+					alt="" 
+					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
+					aria-hidden="true"
+				/>
+			</div>
+
+			<div ref={contentRef} className="max-w-7xl mx-auto w-full relative z-10">
 				<div className="text-center mb-12 sm:mb-16">
 					{/* Badge */}
 					<div className="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 mb-6 w-fit mx-auto">

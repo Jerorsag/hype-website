@@ -38,6 +38,16 @@ export default function FAQ() {
 
 	return (
 		<section id="faq" className="w-full bg-gray-50 py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+			{/* Cohete decorativo - Esquina superior derecha */}
+			<div className="absolute top-12 right-4 sm:right-8 lg:right-12 z-0 opacity-40 pointer-events-none">
+				<img 
+					src="/images/cohetes/cohete-primary.svg" 
+					alt="" 
+					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
+					aria-hidden="true"
+				/>
+			</div>
+
 			{/* Imagen del gato - Posicionamiento responsive */}
 			<div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -translate-x-8 xl:-translate-x-4 z-0 pointer-events-none">
 				<img 

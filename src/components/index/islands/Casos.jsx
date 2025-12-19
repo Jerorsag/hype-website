@@ -143,7 +143,17 @@ export default function Casos() {
 			id="casos" 
 			className="w-full bg-gray-50 pt-12 sm:pt-24 lg:pt-28 pb-6 sm:pb-10 overflow-hidden relative"
 		>
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			{/* Cohete decorativo - Esquina superior derecha */}
+			<div className="absolute top-16 right-4 sm:right-8 lg:right-12 z-0 opacity-40 pointer-events-none">
+				<img 
+					src="/images/cohetes/cohete-primary.svg" 
+					alt="" 
+					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
+					aria-hidden="true"
+				/>
+			</div>
+
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				{/* Título y descripción */}
 				<div className="text-center mb-2 sm:mb-6">
 					<p 
