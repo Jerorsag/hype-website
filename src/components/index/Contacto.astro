@@ -103,39 +103,65 @@
 				const email = formData.get('email');
 
 				if (email && email.trim()) {
-					console.log('Email enviado:', email);
-					
-					// Ocultar texto de garantía
-					if (guaranteeText) {
-						guaranteeText.style.display = 'none';
-					}
-					
-					// Mostrar mensaje de éxito
-					if (successMessage) {
-						successMessage.classList.remove('hidden');
-						successMessage.style.display = 'block';
-					}
-					
-					// Resetear formulario
-					form.reset();
-					
-					// Ocultar mensaje después de 5 segundos
-					setTimeout(function() {
-						if (successMessage) {
-							successMessage.classList.add('hidden');
-							successMessage.style.display = 'none';
-						}
-						if (guaranteeText) {
-							guaranteeText.style.display = 'block';
-							guaranteeText.classList.remove('hidden');
-						}
-					}, 5000);
+					// 1. Bloquear botón y feedback visual
+                    const submitBtn = form.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.innerHTML;
+                    
+                    submitBtn.disabled = true;
+                    submitBtn.innerHTML = 'Enviando...';
+
+                    // 2. Llamada a la API de Astro
+                    fetch('/api/submit-lead', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email.trim(),
+                            ubicacion: 'Formulario Contacto' // Identificador para Sheets
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Mostrar mensaje de éxito
+                            if (guaranteeText) guaranteeText.style.display = 'none';
+                            if (successMessage) {
+                                successMessage.classList.remove('hidden');
+                                successMessage.style.display = 'block';
+                            }
+                            
+                            form.reset();
+
+                            // Ocultar mensaje después de 5 segundos
+                            setTimeout(function() {
+                                if (successMessage) {
+                                    successMessage.classList.add('hidden');
+                                    successMessage.style.display = 'none';
+                                }
+                                if (guaranteeText) {
+                                    guaranteeText.style.display = 'block';
+                                }
+                            }, 5000);
+                        } else {
+                            alert('Hubo un error al guardar el lead en la hoja de cálculo.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Error de conexión con el servidor.');
+                    })
+                    .finally(() => {
+                        // Restaurar botón siempre al terminar
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = originalBtnText;
+                    });
 				} else {
 					console.warn('Email vacío o inválido');
 				}
 				
 				return false;
-			}, { capture: true });
+			});
 		}
 
 		if (document.readyState === 'loading') {

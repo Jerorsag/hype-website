@@ -142,20 +142,53 @@
 </footer>
 
 <script is:inline>
-	document.addEventListener('DOMContentLoaded', () => {
-		const newsletterForm = document.getElementById('newsletter-form');
-		
-		if (newsletterForm) {
-			newsletterForm.addEventListener('submit', (event) => {
-				event.preventDefault();
-				const formData = new FormData(newsletterForm);
-				const email = formData.get('email');
-				
-				if (email) {
-					console.log('Newsletter suscrito:', email);
-					newsletterForm.reset();
-				}
-			});
-		}
-	});
+    document.addEventListener('DOMContentLoaded', () => {
+        const newsletterForm = document.getElementById('newsletter-form');
+        
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                
+                const submitBtn = newsletterForm.querySelector('button[type="submit"]');
+                const formData = new FormData(newsletterForm);
+                const email = formData.get('email');
+                
+                if (email && email.trim()) {
+                    // Estado de carga
+                    const originalText = submitBtn.innerText;
+                    submitBtn.disabled = true;
+                    submitBtn.innerText = '...';
+
+                    // Llamada a la misma API que usamos antes
+                    fetch('/api/submit-lead', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            email: email.trim(),
+                            ubicacion: 'Footer' // <--- Aquí diferenciamos el origen
+                        }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('¡Gracias por suscribirte!');
+                            newsletterForm.reset();
+                        } else {
+                            console.error('Error en API:', data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error de red:', error);
+                    })
+                    .finally(() => {
+                        // Restaurar botón
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = originalText;
+                    });
+                }
+            });
+        }
+    });
 </script>
