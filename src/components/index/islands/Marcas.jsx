@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { getCldImageUrl } from "astro-cloudinary/helpers";
 
 export default function Marcas() {
   const containerRef = useRef(null);
@@ -7,13 +8,67 @@ export default function Marcas() {
 
   // Lista de marcas - cambia las rutas según tus imágenes en public/images/marcas
   const marcas = [
-    { id: 1, name: 'Marca 1', src: '/images/marcas-hype/ALITAS MX.png' },
-    { id: 2, name: 'Marca 2', src: '/images/marcas-hype/BOGOTANAS.png' },
-    { id: 3, name: 'Marca 3', src: '/images/marcas-hype/blix.png' },
-    { id: 4, name: 'Marca 4', src: '/images/marcas-hype/HL.png' },
-    { id: 5, name: 'Marca 5', src: '/images/marcas-hype/TERPEL.png' },
-    { id: 6, name: 'Marca 6', src: '/images/marcas-hype/RODADA.png' }
-  ];
+  {
+    id: 1,
+    name: "Alitas MX",
+    src: getCldImageUrl({
+      src: "ALITAS_MX_wmgjjh", // public_id REAL en Cloudinary
+      height: 80,
+      quality: "auto",
+      format: "auto",
+    }),
+  },
+  {
+    id: 2,
+    name: "Bogotanas",
+    src: getCldImageUrl({
+      src: "BOGOTANAS_y0xj40", 
+      height: 80,
+      quality: "auto",
+      format: "auto",
+    }),
+  },
+  {
+    id: 3,
+    name: "Blix",
+    src: getCldImageUrl({
+      src: "blix_e0ellw", 
+      height: 80,
+      quality: "auto",
+      format: "auto",
+    }),
+  },
+  {
+    id: 4,
+    name: "HL",
+    src: getCldImageUrl({
+      src: "HL_s56nnz",
+      height: 80,
+      quality: "auto",
+      format: "auto",
+    }),
+  },
+  {
+    id: 5,
+    name: "Terpel",
+    src: getCldImageUrl({
+      src: "TERPEL_xdcqb1",
+      height: 80,
+      quality: "auto",
+      format: "auto",
+    }),
+  },
+  {
+    id: 6,
+    name: "Rodada",
+    src: getCldImageUrl({
+      src: "RODADA_wdixlo",
+      height: 80,
+      quality: "auto",
+      format: "auto",
+    }),
+  },
+];
 
   useEffect(() => {
     let tween = null;
