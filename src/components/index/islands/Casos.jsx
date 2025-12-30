@@ -146,7 +146,7 @@ export default function Casos() {
 			{/* Cohete decorativo - Esquina superior derecha */}
 			<div className="absolute top-16 right-4 sm:right-8 lg:right-12 z-0 opacity-40 pointer-events-none">
 				<img 
-					src="/images/cohetes/cohete-primary.svg" 
+					src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767105512/cohete-primary_gh35qu.svg" 
 					alt="" 
 					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
 					aria-hidden="true"

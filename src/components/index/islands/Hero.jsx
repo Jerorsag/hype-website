@@ -227,13 +227,6 @@ function HeroStats() {
 function HeroBanner({ imageRef }) {
   const floatRef = useRef(null);
 
-  const imageUrl = getCldImageUrl({
-    src: "banner_rvnrit",
-    width: 1200,
-    quality: "auto",
-    format: "auto",
-  });
-
   useEffect(() => {
     let ctx = null;
     
@@ -276,7 +269,7 @@ function HeroBanner({ imageRef }) {
       >
         <div ref={floatRef}>
           <img 
-            src={imageUrl}
+            src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104081/banner_rvnrit.png"
             alt="Equipo Hype - Tiburones del Marketing Digital"
             className="w-full h-auto rounded-2xl object-cover shadow-2xl hover:scale-105 transition-transform duration-700 ease-out"
             style={{
@@ -387,8 +380,8 @@ export default function Hero() {
       {/* Cohete decorativo - Esquina superior derecha */}
       <div className="absolute top-8 right-4 sm:right-8 lg:right-12 z-0 opacity-60 pointer-events-none">
         <img 
-          src="/images/cohetes/cohete-white.svg" 
-          alt="" 
+          src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767105514/cohete-white_jim4mb.svg"
+          alt="Cohete Representativo de Hype" 
           className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
           aria-hidden="true"
         />

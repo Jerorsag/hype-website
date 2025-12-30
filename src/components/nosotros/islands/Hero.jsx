@@ -55,7 +55,7 @@ export default function Hero() {
 			{/* Cohete decorativo - Esquina superior derecha */}
 			<div className="absolute top-8 right-4 sm:right-8 lg:right-12 z-0 opacity-60 pointer-events-none">
 				<img 
-					src="/images/cohetes/cohete-white.svg" 
+					src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767105514/cohete-white_jim4mb.svg" 
 					alt="" 
 					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
 					aria-hidden="true"
