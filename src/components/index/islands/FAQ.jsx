@@ -41,7 +41,7 @@ export default function FAQ() {
 			{/* Cohete decorativo - Esquina superior derecha */}
 			<div className="absolute top-12 right-4 sm:right-8 lg:right-12 z-0 opacity-40 pointer-events-none">
 				<img 
-					src="/images/cohetes/cohete-primary.svg" 
+					src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767105512/cohete-primary_gh35qu.svg" 
 					alt="" 
 					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
 					aria-hidden="true"
@@ -51,7 +51,7 @@ export default function FAQ() {
 			{/* Imagen del gato - Posicionamiento responsive */}
 			<div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 -translate-x-8 xl:-translate-x-4 z-0 pointer-events-none">
 				<img 
-					src="/images/faq/gata_hype.png" 
+					src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767105522/gata_hype_qw2d15.png" 
 					alt="Gata Hype" 
 					className="w-auto h-[400px] xl:h-[500px] opacity-90"
 					style={{ maxWidth: 'none' }}

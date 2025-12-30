@@ -1,11 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 
+const videos = [
+  'https://res.cloudinary.com/ddk9axpgt/video/upload/q_auto,f_auto/v1767108314/caso1_seyte2.mp4',
+  'https://res.cloudinary.com/ddk9axpgt/video/upload/q_auto,f_auto/v1767108316/caso2_glxcg7.mp4',
+  'https://res.cloudinary.com/ddk9axpgt/video/upload/q_auto,f_auto/v1767108320/caso3_cv65kq.mp4',
+  'https://res.cloudinary.com/ddk9axpgt/video/upload/q_auto,f_auto/v1767108322/caso4_ldfacu.mp4',
+  'https://res.cloudinary.com/ddk9axpgt/video/upload/q_auto,f_auto/v1767108325/caso5_zsoxo3.mp4',
+  'https://res.cloudinary.com/ddk9axpgt/video/upload/q_auto,f_auto/v1767108318/caso6_gv9rvu.mp4'
+];
+
 export default function Casos() {
 	const sectionRef = useRef(null);
 	const trackRef = useRef(null);
 	const containerRef = useRef(null);
 	const videoRefs = useRef({});
-	const [videos, setVideos] = useState([]);
 	const [isMobile, setIsMobile] = useState(false);
 	const [activeVideoIndex, setActiveVideoIndex] = useState(0);
 	const slideRefs = useRef([]);
@@ -20,43 +28,7 @@ export default function Casos() {
 		return () => window.removeEventListener('resize', checkMobile);
 	}, []);
 
-	// Cargar videos desde public/videos
-	useEffect(() => {
-		// Lista directa de 6 videos
-		const videoList = [
-			'/videos/caso1.mp4',
-			'/videos/caso2.mp4',
-			'/videos/caso3.mp4',
-			'/videos/caso4.mp4',
-			'/videos/caso5.mp4',
-			'/videos/caso6.mp4'
-		];
-
-		// Verificar cuáles existen
-		Promise.all(
-			videoList.map((path) =>
-				fetch(path, { method: 'HEAD' })
-					.then((res) => {
-						if (res.ok) {
-							return path;
-						}
-						return null;
-					})
-					.catch((err) => {
-						return null;
-					})
-			)
-		).then((results) => {
-			const found = results.filter(Boolean);
-			if (found.length > 0) {
-				setVideos(found);
-			} else {
-				// Si no se encuentran, usar la lista directa de todos modos
-				setVideos(videoList);
-			}
-		});
-	}, []);
-
+	
 	// Scroll horizontal nativo en móvil con IntersectionObserver para detectar video activo
 	useEffect(() => {
 		if (!isMobile || !containerRef.current || videos.length === 0) return;
@@ -146,7 +118,7 @@ export default function Casos() {
 			{/* Cohete decorativo - Esquina superior derecha */}
 			<div className="absolute top-16 right-4 sm:right-8 lg:right-12 z-0 opacity-40 pointer-events-none">
 				<img 
-					src="/images/cohetes/cohete-primary.svg" 
+					src="https://res.cloudinary.com/ddk9axpgt/image/upload/q_auto,f_auto/v1767105512/cohete-primary_gh35qu.svg" 
 					alt="" 
 					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
 					aria-hidden="true"
@@ -199,7 +171,7 @@ export default function Casos() {
 										loop 
 										playsInline 
 										autoPlay
-										preload="auto"
+										preload="metadata"
 										style={{ 
 											display: 'block', 
 											width: '100%', 
@@ -290,7 +262,7 @@ export default function Casos() {
 													loop 
 													playsInline 
 													autoPlay
-													preload="auto"
+													preload="metadata"
 													className="w-full h-full object-contain"
 													style={{ 
 														objectPosition: 'center center',

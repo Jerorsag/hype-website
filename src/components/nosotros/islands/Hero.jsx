@@ -55,7 +55,7 @@ export default function Hero() {
 			{/* Cohete decorativo - Esquina superior derecha */}
 			<div className="absolute top-8 right-4 sm:right-8 lg:right-12 z-0 opacity-60 pointer-events-none">
 				<img 
-					src="/images/cohetes/cohete-white.svg" 
+					src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767105514/cohete-white_jim4mb.svg" 
 					alt="" 
 					className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 transform rotate-12"
 					aria-hidden="true"
@@ -108,7 +108,7 @@ export default function Hero() {
 					<div className="flex items-center justify-center gap-6 sm:gap-8 lg:gap-12 flex-wrap">
 						<div className="shark-container">
 							<img 
-								src="/images/tiburones/lopera.png" 
+								src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104078/lopera_mufbzi.png" 
 								alt="Lopera Tiburón" 
 								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
@@ -116,7 +116,7 @@ export default function Hero() {
 						</div>
 						<div className="shark-container">
 							<img 
-								src="/images/tiburones/mauro.png" 
+								src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104080/mauro_o5mebq.png" 
 								alt="Mauro Tiburón" 
 								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
@@ -124,7 +124,7 @@ export default function Hero() {
 						</div>
 						<div className="shark-container">
 							<img 
-								src="/images/tiburones/cm.png" 
+								src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104080/cm_vhxakt.png" 
 								alt="Community Manager Tiburón" 
 								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
@@ -132,7 +132,7 @@ export default function Hero() {
 						</div>
 						<div className="shark-container">
 							<img 
-								src="/images/tiburones/kami.png" 
+								src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104080/kami_scghbj.png" 
 								alt="Camila Tiburón" 
 								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
@@ -140,7 +140,7 @@ export default function Hero() {
 						</div>
 						<div className="shark-container">
 							<img 
-								src="/images/tiburones/villa.png" 
+								src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104079/villa_uirhfx.png" 
 								alt="Villa Tiburón" 
 								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
@@ -148,7 +148,7 @@ export default function Hero() {
 						</div>
 						<div className="shark-container">
 							<img 
-								src="/images/tiburones/ladino.png" 
+								src="https://res.cloudinary.com/ddk9axpgt/image/upload/v1767104079/ladino_t00uq7.png" 
 								alt="Steven Tiburón" 
 								className="w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 object-contain hover:scale-110 transition-all duration-500 ease-out cursor-pointer hover:drop-shadow-2xl"
 								style={{ opacity: 1, visibility: 'visible', willChange: 'transform', transformOrigin: 'center' }}
